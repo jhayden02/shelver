@@ -1,6 +1,6 @@
 /***********************************************************************************************
 *
-*   HomeController.cs
+*   MapController.cs
 *
 *   Copyright (c) 2026 Josh Hayden (@jhayden02)
 *
@@ -24,14 +24,9 @@ using shelf_manager.Models;
 
 namespace shelf_manager.Controllers;
 
-public class HomeController : Controller
+public class MapController : Controller
 {
-    public IActionResult Index()
-    {
-        return View();
-    }
-
-    public IActionResult Privacy()
+    public IActionResult Map()
     {
         return View();
     }
