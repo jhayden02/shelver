@@ -1,4 +1,4 @@
-# ![Shelver](wwwroot/banner.png)
+# ![Shelver](res/img/banner.png)
 
 A lightweight inventory location management software.
 
