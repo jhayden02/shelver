@@ -1,4 +1,4 @@
-# Shelver
+# ![Shelver](wwwroot/banner.png)
 
 A lightweight inventory location management software.
 
