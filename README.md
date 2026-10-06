@@ -1,8 +1,8 @@
-# Shelf Manager
+# Shelver
 
-A lightweight tool for managing inventory that is stored on shelves.
+A lightweight inventory location management software.
 
-Shelf Manager interacts with an inventory database (like Shopify) to help manage a local layout of shelving for pickers and packers in a company.
+Shelver interacts with an inventory database (like Shopify) to help manage a local layout of shelving for pickers and packers in a company.
 
 The manager displays a 3D layout of the office, with all created shelves where they exist physically.
 
@@ -14,6 +14,6 @@ Actions:
 - Move item to another shelf.
 
 ### License
-Shelf Manager is licensed under the GNU General Public License v3.0. You may read the full copy
+Shelver is licensed under the GNU General Public License v3.0. You may read the full copy
 of the license [here](LICENSE).
 

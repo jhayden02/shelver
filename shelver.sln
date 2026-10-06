@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "shelf_manager", "shelf_manager.csproj", "{BB92CA65-12D4-4212-98AA-88BCF0210560}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "shelver", "shelver.csproj", "{BB92CA65-12D4-4212-98AA-88BCF0210560}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
