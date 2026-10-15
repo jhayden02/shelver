@@ -26,23 +26,23 @@ body {
   background-color: #c0c0c0;
 }
 
-.app-navbar,
+.app_navbar,
 .footer {
   color: #000000;
   background-color: #a9a9a9;
 }
 
-.app-navbar {
+.app_navbar {
   border-color: #808080 !important;
 }
 
-.app-navbar .navbar-brand,
-.app-navbar .nav-link {
+.app_navbar .navbar-brand,
+.app_navbar .nav-link {
   color: #000000;
 }
 
-.app-navbar .nav-link:hover,
-.app-navbar .nav-link:focus {
+.app_navbar .nav-link:hover,
+.app_navbar .nav-link:focus {
   color: #000000;
 }
 

@@ -1,14 +1,14 @@
 /***********************************************************************************************
 *
-*   MapController.cs
+*   map_controller.cs
 *
 *   Copyright (c) 2026 Josh Hayden (@jhayden02)
 *
-*   Shelver is free software: you can redistribute it and/or modify
+*   shelver is free software: you can redistribute it and/or modify
 *   it under the terms of the GNU General Public License v3.0 as published
 *   by the Free Software Foundation.
 *
-*   Shelver is distributed in the hope that it will be useful,
+*   shelver is distributed in the hope that it will be useful,
 *   but WITHOUT ANY WARRANTY; without even the implied warranty of
 *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 *   GNU General Public License for more details.
@@ -20,20 +20,24 @@
 
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using shelver.Models;
+using shelver.models;
 
-namespace shelver.Controllers;
+namespace shelver.controllers;
 
-public class MapController : Controller
+public class map_controller : Controller
 {
-    public IActionResult Map()
+    public IActionResult map()
     {
         return View();
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-    public IActionResult Error()
+    public IActionResult error()
     {
-        return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        error_view_model model = new error_view_model
+        {
+            request_id = Activity.Current?.Id ?? HttpContext.TraceIdentifier
+        };
+        return View(model);
     }
 }

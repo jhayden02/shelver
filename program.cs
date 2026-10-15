@@ -1,14 +1,14 @@
 /***********************************************************************************************
 *
-*   Program.cs
+*   program.cs
 *
 *   Copyright (c) 2026 Josh Hayden (@jhayden02)
 *
-*   Shelver is free software: you can redistribute it and/or modify
+*   shelver is free software: you can redistribute it and/or modify
 *   it under the terms of the GNU General Public License v3.0 as published
 *   by the Free Software Foundation.
 *
-*   Shelver is distributed in the hope that it will be useful,
+*   shelver is distributed in the hope that it will be useful,
 *   but WITHOUT ANY WARRANTY; without even the implied warranty of
 *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 *   GNU General Public License for more details.
@@ -18,17 +18,23 @@
 *
 ***********************************************************************************************/
 
-var builder = WebApplication.CreateBuilder(args);
+using Microsoft.AspNetCore.Mvc;
+using shelver.controllers;
+
+WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews((MvcOptions options) =>
+{
+    options.Conventions.Add(new controller_name_convention());
+});
 
-var app = builder.Build();
+WebApplication app = builder.Build();
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
-    app.UseExceptionHandler("/Map/Error");
+    app.UseExceptionHandler("/map/error");
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
@@ -42,7 +48,7 @@ app.MapStaticAssets();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Map}/{action=Map}/{id?}")
+    pattern: "{controller=map}/{action=map}/{id?}")
     .WithStaticAssets();
 
 
