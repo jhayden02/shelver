@@ -37,8 +37,8 @@ from fontTools.pens.transformPen import TransformPen
 from fontTools.ttLib import TTFont
 
 repository_root: Path = Path(__file__).resolve().parent.parent
-fonts_directory: Path = repository_root / "src" / "shelver" / "wwwroot" / "fonts"
-font_path: Path = fonts_directory / "inconsolata_regular.woff"
+fonts_directory: Path = repository_root / "src" / "Shelver" / "wwwroot" / "fonts"
+font_path: Path = fonts_directory / "inconsolata-regular.woff"
 banner_path: Path = repository_root / "res" / "img" / "banner.svg"
 
 banner_text: str = "shelver"

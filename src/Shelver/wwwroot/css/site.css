@@ -1,0 +1,120 @@
+@font-face {
+  font-family: "inconsolata";
+  src: url("../fonts/inconsolata-regular.woff2") format("woff2"), url("../fonts/inconsolata-regular.woff") format("woff");
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "inconsolata";
+  src: url("../fonts/inconsolata-bold.woff2") format("woff2"), url("../fonts/inconsolata-bold.woff") format("woff");
+  font-weight: 700;
+  font-display: swap;
+}
+
+html {
+  color-scheme: light;
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem #ffffff, 0 0 0 0.25rem #0000aa;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+  background-color: #c0c0c0;
+}
+
+body {
+  margin-bottom: 60px;
+  font-family: "inconsolata", monospace;
+  color: #000000;
+  background-color: #c0c0c0;
+}
+
+.app-navbar,
+.footer {
+  color: #000000;
+  background-color: #a9a9a9;
+}
+
+.app-navbar {
+  border-color: #808080 !important;
+}
+
+.app-navbar .navbar-brand,
+.app-navbar .nav-link {
+  color: #000000;
+}
+
+/* The brand is boxed so it does not read as another menu link. */
+.app-navbar .navbar-brand {
+  padding: 0 0.5rem;
+  background-color: #ffffff;
+  border: 1px solid #000000;
+}
+
+.app-navbar .nav-link:hover,
+.app-navbar .nav-link:focus {
+  color: #000000;
+}
+
+.footer {
+  border-color: #808080 !important;
+}
+
+.floor-plan-title {
+  font-size: 1.5rem;
+}
+
+/* The door openings are painted in the background color to cut gaps into the walls, so both
+   colors are defined once here. */
+.floor-plan {
+  --floor-plan-background: #ffffff;
+  --floor-plan-line: #333333;
+  display: block;
+  width: 100%;
+  height: auto;
+  background-color: var(--floor-plan-background);
+  border: 1px solid #808080;
+}
+
+.floor-plan .wall {
+  stroke: var(--floor-plan-line);
+  stroke-linecap: square;
+}
+
+.floor-plan .door-opening {
+  fill: var(--floor-plan-background);
+}
+
+.floor-plan .door-swing {
+  fill: none;
+  stroke: var(--floor-plan-line);
+  stroke-width: 2px;
+}
+
+a {
+  color: #0000ee;
+}
+
+a:hover {
+  color: #0000aa;
+}
+
+.form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {
+  color: var(--bs-secondary-color);
+  text-align: end;
+}
+
+.form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
+  text-align: start;
+}

@@ -1,0 +1,8 @@
+@model FloorPlan
+@{
+    ViewData["Title"] = Model.Name;
+}
+
+<h1 class="floor-plan-title">@Model.Name</h1>
+
+<partial name="_FloorPlanSvg" model="Model" />

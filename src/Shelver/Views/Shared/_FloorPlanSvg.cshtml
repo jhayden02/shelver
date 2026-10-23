@@ -1,0 +1,40 @@
+@using System.Globalization
+@model FloorPlan
+
+@functions {
+    // SVG only accepts "." as the decimal separator and "-" as the minus sign, so numbers are
+    // written without the server's culture settings.
+    private static string SvgNumber(double value)
+    {
+        return value.ToString(CultureInfo.InvariantCulture);
+    }
+}
+
+<svg class="floor-plan" viewBox="0 0 @SvgNumber(Model.WidthCm) @SvgNumber(Model.HeightCm)" role="img" aria-label="@Model.Name">
+    @foreach (Wall wall in Model.Walls)
+    {
+        <line class="wall" x1="@SvgNumber(wall.StartX)" y1="@SvgNumber(wall.StartY)" x2="@SvgNumber(wall.EndX)" y2="@SvgNumber(wall.EndY)" stroke-width="@SvgNumber(Wall.ThicknessCm)" />
+    }
+
+    @* Doors are drawn after every wall so that each opening covers the wall beneath it. *@
+    @foreach (Wall wall in Model.Walls)
+    {
+        foreach (Door door in wall.Doors)
+        {
+            // Inside the rotated group the wall runs along the positive x axis from (0, 0),
+            // and the left side of the wall is negative y.
+            int swingDirection = door.SwingSide == DoorSwingSide.Left ? -1 : 1;
+            int closingDirection = door.HingeEnd == DoorHingeEnd.Start ? 1 : -1;
+            double openingStartX = door.OffsetCm - Door.WidthCm / 2.0;
+            double hingeX = door.OffsetCm - closingDirection * Door.WidthCm / 2.0;
+            double latchX = hingeX + closingDirection * Door.WidthCm;
+            double openLeafY = swingDirection * Door.WidthCm;
+            int arcSweepFlag = swingDirection * closingDirection < 0 ? 1 : 0;
+
+            <g transform="translate(@SvgNumber(wall.StartX) @SvgNumber(wall.StartY)) rotate(@SvgNumber(wall.AngleDegrees))">
+                <rect class="door-opening" x="@SvgNumber(openingStartX)" y="@SvgNumber(-Wall.ThicknessCm / 2.0 - 1)" width="@SvgNumber(Door.WidthCm)" height="@SvgNumber(Wall.ThicknessCm + 2)" />
+                <path class="door-swing" d="M @SvgNumber(hingeX) 0 L @SvgNumber(hingeX) @SvgNumber(openLeafY) A @SvgNumber(Door.WidthCm) @SvgNumber(Door.WidthCm) 0 0 @arcSweepFlag @SvgNumber(latchX) 0" />
+            </g>
+        }
+    }
+</svg>
