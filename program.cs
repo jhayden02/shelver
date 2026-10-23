@@ -20,6 +20,7 @@
 
 using Microsoft.AspNetCore.Mvc;
 using shelver.controllers;
+using shelver.data;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
@@ -28,6 +29,7 @@ builder.Services.AddControllersWithViews((MvcOptions options) =>
 {
     options.Conventions.Add(new controller_name_convention());
 });
+builder.Services.AddSingleton<floor_plan_store>();
 
 WebApplication app = builder.Build();
 

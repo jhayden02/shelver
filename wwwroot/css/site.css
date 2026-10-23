@@ -50,6 +50,37 @@ body {
   border-color: #808080 !important;
 }
 
+.floor_plan_title {
+  font-size: 1.5rem;
+}
+
+/* The door openings are painted in the background color to cut gaps into the walls, so both
+   colors are defined once here. */
+.floor_plan {
+  --floor_plan_background: #ffffff;
+  --floor_plan_line: #333333;
+  display: block;
+  width: 100%;
+  height: auto;
+  background-color: var(--floor_plan_background);
+  border: 1px solid #808080;
+}
+
+.floor_plan .wall {
+  stroke: var(--floor_plan_line);
+  stroke-linecap: square;
+}
+
+.floor_plan .door_opening {
+  fill: var(--floor_plan_background);
+}
+
+.floor_plan .door_swing {
+  fill: none;
+  stroke: var(--floor_plan_line);
+  stroke-width: 2px;
+}
+
 a {
   color: #0000ee;
 }

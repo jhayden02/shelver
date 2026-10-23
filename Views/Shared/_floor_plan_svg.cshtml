@@ -1,0 +1,40 @@
+@using System.Globalization
+@model floor_plan
+
+@functions {
+    // SVG only accepts "." as the decimal separator and "-" as the minus sign, so numbers are
+    // written without the server's culture settings.
+    private static string svg_number(double value)
+    {
+        return value.ToString(CultureInfo.InvariantCulture);
+    }
+}
+
+<svg class="floor_plan" viewBox="0 0 @svg_number(Model.width_cm) @svg_number(Model.height_cm)" role="img" aria-label="@Model.name">
+    @foreach (wall plan_wall in Model.walls)
+    {
+        <line class="wall" x1="@svg_number(plan_wall.start_x)" y1="@svg_number(plan_wall.start_y)" x2="@svg_number(plan_wall.end_x)" y2="@svg_number(plan_wall.end_y)" stroke-width="@svg_number(wall.thickness_cm)" />
+    }
+
+    @* Doors are drawn after every wall so that each opening covers the wall beneath it. *@
+    @foreach (wall plan_wall in Model.walls)
+    {
+        foreach (door wall_door in plan_wall.doors)
+        {
+            // Inside the rotated group the wall runs along the positive x axis from (0, 0),
+            // and the left side of the wall is negative y.
+            int swing_direction = wall_door.swing_side == door_swing_side.LEFT ? -1 : 1;
+            int closing_direction = wall_door.hinge_end == door_hinge_end.START ? 1 : -1;
+            double opening_start_x = wall_door.offset_cm - door.width_cm / 2.0;
+            double hinge_x = wall_door.offset_cm - closing_direction * door.width_cm / 2.0;
+            double latch_x = hinge_x + closing_direction * door.width_cm;
+            double open_leaf_y = swing_direction * door.width_cm;
+            int arc_sweep_flag = swing_direction * closing_direction < 0 ? 1 : 0;
+
+            <g transform="translate(@svg_number(plan_wall.start_x) @svg_number(plan_wall.start_y)) rotate(@svg_number(plan_wall.angle_degrees))">
+                <rect class="door_opening" x="@svg_number(opening_start_x)" y="@svg_number(-wall.thickness_cm / 2.0 - 1)" width="@svg_number(door.width_cm)" height="@svg_number(wall.thickness_cm + 2)" />
+                <path class="door_swing" d="M @svg_number(hinge_x) 0 L @svg_number(hinge_x) @svg_number(open_leaf_y) A @svg_number(door.width_cm) @svg_number(door.width_cm) 0 0 @arc_sweep_flag @svg_number(latch_x) 0" />
+            </g>
+        }
+    }
+</svg>

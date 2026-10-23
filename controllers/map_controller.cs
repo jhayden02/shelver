@@ -20,24 +20,33 @@
 
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
+using shelver.data;
 using shelver.models;
 
 namespace shelver.controllers;
 
 public class map_controller : Controller
 {
-    public IActionResult map()
+    private readonly floor_plan_store plan_store;
+
+    public map_controller(floor_plan_store plan_store)
     {
-        return View();
+        this.plan_store = plan_store;
+    }
+
+    public IActionResult map(int id = 1)
+    {
+        floor_plan? plan = plan_store.find_floor_plan(id);
+        if (plan == null)
+        {
+            return NotFound();
+        }
+        return View(plan);
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult error()
     {
-        error_view_model model = new error_view_model
-        {
-            request_id = Activity.Current?.Id ?? HttpContext.TraceIdentifier
-        };
-        return View(model);
+        return View(new error_view_model { request_id = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
     }
 }
