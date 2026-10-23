@@ -55,3 +55,7 @@ app.MapControllerRoute(
 
 
 app.Run();
+
+// This makes the compiler-generated Program class public so the test project's
+// WebApplicationFactory can start the app.
+public partial class Program { }
