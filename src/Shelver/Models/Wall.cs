@@ -25,6 +25,7 @@ public class Wall
     public const int ThicknessCm = 15;
 
     public int Id { get; set; }
+    public int FloorPlanId { get; set; }
     public int StartX { get; set; }
     public int StartY { get; set; }
     public int EndX { get; set; }

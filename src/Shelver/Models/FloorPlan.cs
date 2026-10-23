@@ -28,5 +28,6 @@ public class FloorPlan
     public string Name { get; set; } = "";
     public int WidthCm { get; set; }
     public int HeightCm { get; set; }
+    public FloorPlanState State { get; set; } = FloorPlanState.Setup;
     public List<Wall> Walls { get; set; } = new List<Wall>();
 }

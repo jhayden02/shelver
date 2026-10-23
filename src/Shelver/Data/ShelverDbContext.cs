@@ -1,6 +1,6 @@
 /***********************************************************************************************
 *
-*   FloorPlanStoreTests.cs
+*   ShelverDbContext.cs
 *
 *   Copyright (c) 2026 Josh Hayden (@jhayden02)
 *
@@ -18,31 +18,18 @@
 *
 ***********************************************************************************************/
 
-using Shelver.Data;
+using Microsoft.EntityFrameworkCore;
 using Shelver.Models;
 
-namespace Shelver.Tests.Data;
+namespace Shelver.Data;
 
-public class FloorPlanStoreTests
+public class ShelverDbContext : DbContext
 {
-    [Fact]
-    public void FindFloorPlan_KnownId_ReturnsPlan()
+    public ShelverDbContext(DbContextOptions<ShelverDbContext> options) : base(options)
     {
-        FloorPlanStore planStore = new FloorPlanStore();
-
-        FloorPlan? plan = planStore.FindFloorPlan(2);
-
-        Assert.NotNull(plan);
-        Assert.Equal("Office", plan.Name);
     }
 
-    [Fact]
-    public void FindFloorPlan_UnknownId_ReturnsNull()
-    {
-        FloorPlanStore planStore = new FloorPlanStore();
-
-        FloorPlan? plan = planStore.FindFloorPlan(999);
-
-        Assert.Null(plan);
-    }
+    public DbSet<FloorPlan> FloorPlans => Set<FloorPlan>();
+    public DbSet<Wall> Walls => Set<Wall>();
+    public DbSet<Door> Doors => Set<Door>();
 }

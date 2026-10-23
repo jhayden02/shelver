@@ -25,6 +25,7 @@ public class Door
     public const int WidthCm = 90;
 
     public int Id { get; set; }
+    public int WallId { get; set; }
 
     // This is the distance along the wall from its start point to the door's center.
     public int OffsetCm { get; set; }

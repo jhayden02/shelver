@@ -18,15 +18,30 @@
 *
 ***********************************************************************************************/
 
+using Microsoft.Data.Sqlite;
+using Microsoft.EntityFrameworkCore;
 using Shelver.Data;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-builder.Services.AddSingleton<FloorPlanStore>();
+
+// A relative database path is resolved against the project folder rather than the working
+// directory, so the same database is used however the app is started.
+SqliteConnectionStringBuilder connectionStringBuilder = new SqliteConnectionStringBuilder(builder.Configuration.GetConnectionString("Shelver"));
+connectionStringBuilder.DataSource = Path.Combine(builder.Environment.ContentRootPath, connectionStringBuilder.DataSource);
+Directory.CreateDirectory(Path.GetDirectoryName(connectionStringBuilder.DataSource)!);
+builder.Services.AddDbContext<ShelverDbContext>((DbContextOptionsBuilder options) => options.UseSqlite(connectionStringBuilder.ConnectionString));
 
 WebApplication app = builder.Build();
+
+// Pending migrations are applied at startup because a locally hosted install has no
+// separate deployment step to run them.
+using (IServiceScope scope = app.Services.CreateScope())
+{
+    scope.ServiceProvider.GetRequiredService<ShelverDbContext>().Database.Migrate();
+}
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

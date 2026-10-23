@@ -20,6 +20,7 @@
 
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Shelver.Data;
 using Shelver.Models;
 
@@ -27,16 +28,19 @@ namespace Shelver.Controllers;
 
 public class MapController : Controller
 {
-    private readonly FloorPlanStore _planStore;
+    private readonly ShelverDbContext _database;
 
-    public MapController(FloorPlanStore planStore)
+    public MapController(ShelverDbContext database)
     {
-        _planStore = planStore;
+        _database = database;
     }
 
-    public IActionResult Map(int id = 1)
+    public async Task<IActionResult> Map(int id = 1)
     {
-        FloorPlan? plan = _planStore.FindFloorPlan(id);
+        FloorPlan? plan = await _database.FloorPlans
+            .Include((FloorPlan floorPlan) => floorPlan.Walls)
+            .ThenInclude((Wall wall) => wall.Doors)
+            .FirstOrDefaultAsync((FloorPlan floorPlan) => floorPlan.Id == id);
         if (plan == null)
         {
             return NotFound();
