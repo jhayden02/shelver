@@ -1,0 +1,31 @@
+@model CreateFloorPlanViewModel
+@{
+    ViewData["Title"] = "Create Floor Plan";
+}
+
+<h1 class="floor-plan-title">Create floor plan</h1>
+
+<form asp-action="Create" method="post">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="mb-3">
+        <label asp-for="Name" class="form-label"></label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="WidthCm" class="form-label"></label>
+        <input asp-for="WidthCm" class="form-control" />
+        <span asp-validation-for="WidthCm" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="HeightCm" class="form-label"></label>
+        <input asp-for="HeightCm" class="form-control" />
+        <span asp-validation-for="HeightCm" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Create</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

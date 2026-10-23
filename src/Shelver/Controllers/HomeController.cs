@@ -1,6 +1,6 @@
 /***********************************************************************************************
 *
-*   MapController.cs
+*   HomeController.cs
 *
 *   Copyright (c) 2026 Josh Hayden (@jhayden02)
 *
@@ -26,26 +26,19 @@ using Shelver.Models;
 
 namespace Shelver.Controllers;
 
-public class MapController : Controller
+public class HomeController : Controller
 {
     private readonly ShelverDbContext _database;
 
-    public MapController(ShelverDbContext database)
+    public HomeController(ShelverDbContext database)
     {
         _database = database;
     }
 
-    public async Task<IActionResult> Map(int id = 1)
+    public async Task<IActionResult> Index()
     {
-        FloorPlan? plan = await _database.FloorPlans
-            .Include((FloorPlan floorPlan) => floorPlan.Walls)
-            .ThenInclude((Wall wall) => wall.Doors)
-            .FirstOrDefaultAsync((FloorPlan floorPlan) => floorPlan.Id == id);
-        if (plan == null)
-        {
-            return NotFound();
-        }
-        return View(plan);
+        int readyFloorPlanCount = await _database.FloorPlans.CountAsync((FloorPlan plan) => plan.State == FloorPlanState.Done);
+        return View(readyFloorPlanCount);
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

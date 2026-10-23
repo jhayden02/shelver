@@ -46,7 +46,7 @@ using (IServiceScope scope = app.Services.CreateScope())
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
-    app.UseExceptionHandler("/Map/Error");
+    app.UseExceptionHandler("/Home/Error");
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
@@ -60,7 +60,7 @@ app.MapStaticAssets();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Map}/{action=Map}/{id?}")
+    pattern: "{controller=Home}/{action=Index}/{id?}")
     .WithStaticAssets();
 
 

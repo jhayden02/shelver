@@ -1,0 +1,14 @@
+@model int
+@{
+    ViewData["Title"] = "Home";
+    int readyFloorPlanCount = Model;
+}
+
+@if (readyFloorPlanCount == 0)
+{
+    <p>No floor plans are ready yet. Set one up in <a asp-controller="FloorPlans" asp-action="Index">Floor Plans</a>.</p>
+}
+else
+{
+    <p>Viewing floor plans is coming soon.</p>
+}

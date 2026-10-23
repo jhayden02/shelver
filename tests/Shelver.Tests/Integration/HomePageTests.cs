@@ -1,6 +1,6 @@
 /***********************************************************************************************
 *
-*   MapPageTests.cs
+*   HomePageTests.cs
 *
 *   Copyright (c) 2026 Josh Hayden (@jhayden02)
 *
@@ -19,37 +19,21 @@
 ***********************************************************************************************/
 
 using System.Net;
-using Shelver.Models;
 
 namespace Shelver.Tests.Integration;
 
-// Each test starts the whole app on an in-memory server with its own empty database, so each
-// one checks routing, data access, and view rendering together.
-public class MapPageTests
+public class HomePageTests
 {
     [Fact]
-    public async Task GetMap_KnownId_ReturnsRequestedFloorPlan()
+    public async Task GetIndex_NoFloorPlans_ShowsNotReadyMessage()
     {
         using ShelverWebApplicationFactory factory = new ShelverWebApplicationFactory();
-        FloorPlan plan = new FloorPlan { Name = "Office", WidthCm = 1000, HeightCm = 800 };
-        await factory.AddAsync(plan);
         HttpClient client = factory.CreateClient();
 
-        HttpResponseMessage response = await client.GetAsync($"/Map/Map/{plan.Id}");
+        HttpResponseMessage response = await client.GetAsync("/");
         string body = await response.Content.ReadAsStringAsync();
 
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
-        Assert.Contains("Office", body);
-    }
-
-    [Fact]
-    public async Task GetMap_UnknownId_ReturnsNotFound()
-    {
-        using ShelverWebApplicationFactory factory = new ShelverWebApplicationFactory();
-        HttpClient client = factory.CreateClient();
-
-        HttpResponseMessage response = await client.GetAsync("/Map/Map/999");
-
-        Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
+        Assert.Contains("No floor plans are ready yet", body);
     }
 }

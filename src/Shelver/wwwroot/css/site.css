@@ -76,15 +76,27 @@ body {
 }
 
 /* The door openings are painted in the background color to cut gaps into the walls, so both
-   colors are defined once here. */
-.floor-plan {
+   colors are defined once here. The empty state shares them so it looks like a blank plan. */
+.floor-plan,
+.floor-plan-empty {
   --floor-plan-background: #ffffff;
   --floor-plan-line: #333333;
+  background-color: var(--floor-plan-background);
+  border: 1px solid #808080;
+}
+
+.floor-plan {
   display: block;
   width: 100%;
   height: auto;
-  background-color: var(--floor-plan-background);
-  border: 1px solid #808080;
+}
+
+/* This fills the space a floor plan would take and centers the create button inside it. */
+.floor-plan-empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
 }
 
 .floor-plan .wall {
