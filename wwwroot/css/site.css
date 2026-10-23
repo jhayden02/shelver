@@ -1,3 +1,17 @@
+@font-face {
+  font-family: "inconsolata";
+  src: url("../fonts/inconsolata_regular.woff2") format("woff2"), url("../fonts/inconsolata_regular.woff") format("woff");
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "inconsolata";
+  src: url("../fonts/inconsolata_bold.woff2") format("woff2"), url("../fonts/inconsolata_bold.woff") format("woff");
+  font-weight: 700;
+  font-display: swap;
+}
+
 html {
   color-scheme: light;
   font-size: 14px;
@@ -21,7 +35,7 @@ html {
 
 body {
   margin-bottom: 60px;
-  font-family: sans-serif;
+  font-family: "inconsolata", monospace;
   color: #000000;
   background-color: #c0c0c0;
 }
@@ -39,6 +53,13 @@ body {
 .app_navbar .navbar-brand,
 .app_navbar .nav-link {
   color: #000000;
+}
+
+/* The brand is boxed so it does not read as another menu link. */
+.app_navbar .navbar-brand {
+  padding: 0 0.5rem;
+  background-color: #ffffff;
+  border: 1px solid #000000;
 }
 
 .app_navbar .nav-link:hover,
