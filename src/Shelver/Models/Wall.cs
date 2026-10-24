@@ -22,7 +22,7 @@ namespace Shelver.Models;
 
 public class Wall
 {
-    public const int ThicknessCm = 15;
+    public const int ThicknessMm = 150;
 
     public int Id { get; set; }
     public int FloorPlanId { get; set; }

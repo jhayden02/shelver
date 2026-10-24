@@ -25,7 +25,7 @@ namespace Shelver.Migrations
                     b.Property<int>("HingeEnd")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("OffsetCm")
+                    b.Property<int>("OffsetMm")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("SwingSide")
@@ -47,7 +47,7 @@ namespace Shelver.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("HeightCm")
+                    b.Property<int>("HeightMm")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Name")
@@ -57,7 +57,7 @@ namespace Shelver.Migrations
                     b.Property<int>("State")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("WidthCm")
+                    b.Property<int>("WidthMm")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");

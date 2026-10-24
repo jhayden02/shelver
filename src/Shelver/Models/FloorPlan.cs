@@ -20,14 +20,14 @@
 
 namespace Shelver.Models;
 
-// All measurements are whole centimeters from the plan's top-left corner, with y increasing
+// All measurements are whole millimeters from the plan's top-left corner, with y increasing
 // downward to match SVG.
 public class FloorPlan
 {
     public int Id { get; set; }
     public string Name { get; set; } = "";
-    public int WidthCm { get; set; }
-    public int HeightCm { get; set; }
+    public int WidthMm { get; set; }
+    public int HeightMm { get; set; }
     public FloorPlanState State { get; set; } = FloorPlanState.Setup;
     public List<Wall> Walls { get; set; } = new List<Wall>();
 }

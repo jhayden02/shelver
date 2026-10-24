@@ -55,7 +55,7 @@ public class FloorPlansController : Controller
         }
 
         // Validation guarantees the sizes are present, so the null-forgiving reads are safe.
-        FloorPlan plan = new FloorPlan { Name = form.Name.Trim(), WidthCm = form.WidthCm!.Value, HeightCm = form.HeightCm!.Value };
+        FloorPlan plan = new FloorPlan { Name = form.Name.Trim(), WidthMm = LengthUnits.FeetToMillimeters(form.WidthFeet!.Value), HeightMm = LengthUnits.FeetToMillimeters(form.HeightFeet!.Value) };
         _database.FloorPlans.Add(plan);
         await _database.SaveChangesAsync();
 

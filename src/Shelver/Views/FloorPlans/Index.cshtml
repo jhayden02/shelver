@@ -28,7 +28,7 @@ else
             {
                 <tr>
                     <td>@plan.Name</td>
-                    <td>@((plan.WidthCm / 100.0).ToString("0.##")) &times; @((plan.HeightCm / 100.0).ToString("0.##")) m</td>
+                    <td>@LengthUnits.MillimetersToFeet(plan.WidthMm).ToString("0.##") &times; @LengthUnits.MillimetersToFeet(plan.HeightMm).ToString("0.##") ft</td>
                     <td>@plan.State</td>
                     <td><a asp-action="Edit" asp-route-id="@plan.Id">Edit</a></td>
                 </tr>

@@ -23,8 +23,8 @@ using System.ComponentModel.DataAnnotations;
 namespace Shelver.Models;
 
 // The create form binds to this instead of FloorPlan so a posted form cannot set fields such
-// as Id or State. The sizes are nullable so a blank field reports "required" instead of
-// silently becoming 0.
+// as Id or State. Sizes are entered in decimal feet and converted to millimeters on save. They
+// are nullable so a blank field reports "required" instead of silently becoming 0.
 public class CreateFloorPlanViewModel
 {
     [Required]
@@ -32,12 +32,12 @@ public class CreateFloorPlanViewModel
     public string Name { get; set; } = "";
 
     [Required]
-    [Range(100, 100000)]
-    [Display(Name = "Width (cm)")]
-    public int? WidthCm { get; set; }
+    [Range(typeof(decimal), "3", "3000")]
+    [Display(Name = "Width (ft)")]
+    public decimal? WidthFeet { get; set; }
 
     [Required]
-    [Range(100, 100000)]
-    [Display(Name = "Height (cm)")]
-    public int? HeightCm { get; set; }
+    [Range(typeof(decimal), "3", "3000")]
+    [Display(Name = "Height (ft)")]
+    public decimal? HeightFeet { get; set; }
 }

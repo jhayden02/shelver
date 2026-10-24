@@ -111,7 +111,7 @@ body {
 .floor-plan .door-swing {
   fill: none;
   stroke: var(--floor-plan-line);
-  stroke-width: 2px;
+  stroke-width: 20px;
 }
 
 a {

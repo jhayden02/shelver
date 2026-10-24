@@ -22,13 +22,13 @@ namespace Shelver.Models;
 
 public class Door
 {
-    public const int WidthCm = 90;
+    public const int WidthMm = 900;
 
     public int Id { get; set; }
     public int WallId { get; set; }
 
     // This is the distance along the wall from its start point to the door's center.
-    public int OffsetCm { get; set; }
+    public int OffsetMm { get; set; }
 
     public DoorSwingSide SwingSide { get; set; }
     public DoorHingeEnd HingeEnd { get; set; }

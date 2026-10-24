@@ -13,14 +13,14 @@
         <span asp-validation-for="Name" class="text-danger"></span>
     </div>
     <div class="mb-3">
-        <label asp-for="WidthCm" class="form-label"></label>
-        <input asp-for="WidthCm" class="form-control" />
-        <span asp-validation-for="WidthCm" class="text-danger"></span>
+        <label asp-for="WidthFeet" class="form-label"></label>
+        <input asp-for="WidthFeet" class="form-control" type="number" step="any" />
+        <span asp-validation-for="WidthFeet" class="text-danger"></span>
     </div>
     <div class="mb-3">
-        <label asp-for="HeightCm" class="form-label"></label>
-        <input asp-for="HeightCm" class="form-control" />
-        <span asp-validation-for="HeightCm" class="text-danger"></span>
+        <label asp-for="HeightFeet" class="form-label"></label>
+        <input asp-for="HeightFeet" class="form-control" type="number" step="any" />
+        <span asp-validation-for="HeightFeet" class="text-danger"></span>
     </div>
     <button type="submit" class="btn btn-primary">Create</button>
     <a asp-action="Index" class="btn btn-secondary">Cancel</a>

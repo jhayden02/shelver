@@ -53,7 +53,7 @@ public class FloorPlansPageTests
         using ShelverWebApplicationFactory factory = new ShelverWebApplicationFactory();
         HttpClient client = factory.CreateClient(new WebApplicationFactoryClientOptions { AllowAutoRedirect = false });
 
-        HttpResponseMessage response = await PostCreateAsync(client, "Warehouse", "2000", "1200");
+        HttpResponseMessage response = await PostCreateAsync(client, "Warehouse", "65.5", "40");
 
         Assert.Equal(HttpStatusCode.Redirect, response.StatusCode);
         Assert.Matches(@"^/FloorPlans/Edit/\d+$", response.Headers.Location?.OriginalString);
@@ -65,14 +65,14 @@ public class FloorPlansPageTests
         using ShelverWebApplicationFactory factory = new ShelverWebApplicationFactory();
         HttpClient client = factory.CreateClient();
 
-        await PostCreateAsync(client, "Warehouse", "2000", "1200");
+        await PostCreateAsync(client, "Warehouse", "65.5", "40");
 
         using IServiceScope scope = factory.Services.CreateScope();
         ShelverDbContext database = scope.ServiceProvider.GetRequiredService<ShelverDbContext>();
         FloorPlan plan = await database.FloorPlans.SingleAsync();
         Assert.Equal("Warehouse", plan.Name);
-        Assert.Equal(2000, plan.WidthCm);
-        Assert.Equal(1200, plan.HeightCm);
+        Assert.Equal(19964, plan.WidthMm);
+        Assert.Equal(12192, plan.HeightMm);
         Assert.Equal(FloorPlanState.Setup, plan.State);
     }
 
@@ -82,7 +82,7 @@ public class FloorPlansPageTests
         using ShelverWebApplicationFactory factory = new ShelverWebApplicationFactory();
         HttpClient client = factory.CreateClient();
 
-        HttpResponseMessage response = await PostCreateAsync(client, "", "2000", "1200");
+        HttpResponseMessage response = await PostCreateAsync(client, "", "65.5", "40");
         string body = await response.Content.ReadAsStringAsync();
 
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
@@ -95,11 +95,11 @@ public class FloorPlansPageTests
         using ShelverWebApplicationFactory factory = new ShelverWebApplicationFactory();
         HttpClient client = factory.CreateClient();
 
-        HttpResponseMessage response = await PostCreateAsync(client, "Warehouse", "0", "1200");
+        HttpResponseMessage response = await PostCreateAsync(client, "Warehouse", "0", "40");
         string body = await response.Content.ReadAsStringAsync();
 
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
-        Assert.Contains("The field Width (cm) must be between 100 and 100000.", body);
+        Assert.Contains("The field Width (ft) must be between 3 and 3000.", body);
     }
 
     [Fact]
@@ -107,13 +107,14 @@ public class FloorPlansPageTests
     {
         using ShelverWebApplicationFactory factory = new ShelverWebApplicationFactory();
         HttpClient client = factory.CreateClient();
-        await PostCreateAsync(client, "Warehouse", "2000", "1200");
+        await PostCreateAsync(client, "Warehouse", "65.5", "40");
 
         HttpResponseMessage response = await client.GetAsync("/FloorPlans");
         string body = await response.Content.ReadAsStringAsync();
 
         Assert.Contains("<table", body);
         Assert.Contains("Warehouse", body);
+        Assert.Contains("65.5 &times; 40 ft", body);
         Assert.DoesNotContain("floor-plan-empty", body);
     }
 
@@ -130,7 +131,7 @@ public class FloorPlansPageTests
 
     // This submits the create form the way a browser does: it loads the form first so the
     // client holds the antiforgery cookie, then posts the matching token from the form.
-    private static async Task<HttpResponseMessage> PostCreateAsync(HttpClient client, string name, string widthCm, string heightCm)
+    private static async Task<HttpResponseMessage> PostCreateAsync(HttpClient client, string name, string widthFeet, string heightFeet)
     {
         string formPage = await client.GetStringAsync("/FloorPlans/Create");
         string antiforgeryToken = Regex.Match(formPage, "name=\"__RequestVerificationToken\" type=\"hidden\" value=\"([^\"]+)\"").Groups[1].Value;
@@ -138,8 +139,8 @@ public class FloorPlansPageTests
         Dictionary<string, string> fields = new Dictionary<string, string>
         {
             ["Name"] = name,
-            ["WidthCm"] = widthCm,
-            ["HeightCm"] = heightCm,
+            ["WidthFeet"] = widthFeet,
+            ["HeightFeet"] = heightFeet,
             ["__RequestVerificationToken"] = antiforgeryToken
         };
         return await client.PostAsync("/FloorPlans/Create", new FormUrlEncodedContent(fields));
