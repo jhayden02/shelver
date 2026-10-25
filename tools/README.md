@@ -4,7 +4,8 @@ Helper scripts for working on shelver. They are not part of the app and are neve
 
 ## Running the scripts
 
-The scripts are run with [uv](https://docs.astral.sh/uv/). To install it, follow the instructions [here](https://docs.astral.sh/uv/getting-started/installation/).
+The scripts are run with [uv](https://docs.astral.sh/uv/). To install it, follow the
+instructions [here](https://docs.astral.sh/uv/getting-started/installation/).
 
 ### On any platform
 
