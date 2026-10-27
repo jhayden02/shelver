@@ -17,7 +17,7 @@ concern.
 ## Purpose
 
 shelver is a visual frontend over a store's inventory system (Shopify today). It shows where
-shelves physically are in a building and which inventory sits on each shelf, so employees can:
+shelves physically are in a building and which inventory sits on each shelf, so users can:
 
 - Find which shelf holds an item of inventory.
 - Audit a shelf by comparing it, level by level, against what the store says is on it.
@@ -30,8 +30,8 @@ store does not have.
 ## Concepts
 
 - **Building:** a named site such as "Main Office" or "Warehouse," created and saved as a
-  whole. Its number of floors is set when it is created and never changes. Set up once and
-  rarely changed.
+  whole. It has a one-letter **code**, such as `W`, that starts every shelf name in it. Its
+  number of floors is set when it is created and never changes.
 - **Floor:** one level of a building, numbered 1, 2, 3 upward. Each floor has its own size,
   structure, and shelves. All floors of a building share one coordinate system, so a point on
   one floor is directly above or below the same point on the others; a smaller floor, such as
@@ -40,8 +40,11 @@ store does not have.
 - **Stairs:** a stairway linking a lower and an upper floor, drawn as a rectangle of any length
   covering the same area on both. One side is marked **bottom**, where it is entered from the
   lower floor, and the opposite side **top**, where it is entered from the upper floor.
-- **Shelf:** one shelving unit placed on a floor. It has a permanent internal ID, a name, a
-  position, and a number of levels.
+- **Room:** a lettered rectangle (A–Z) on a floor that groups shelves and has one entrance
+  door. Shelf numbering runs from the entrance.
+- **Shelf:** one shelving unit placed in a room. It has a permanent internal ID, a name, a
+  position, and a number of levels. Its name is assigned from its building, room, and number,
+  for example `W-A1`, and changes only on request.
 - **Level:** one horizontal tier of a shelf, holding variants in a saved order.
 - **Product:** an item in the store, with a title and one or more variants.
 - **Variant:** one version of a product, such as a size or color, with its own SKU, quantity,
@@ -50,8 +53,8 @@ store does not have.
   has one variant.
 - **Location field:** a custom variant field the store owner designates to hold the names of
   the shelves a variant is on. See [data.md](data.md#store-interface).
-- **Location name:** a shelf's name as stored in the location field, for example `A3`. This is
-  not Shopify's own "Location," which means a whole site.
+- **Location name:** a shelf's name as stored in the location field, for example `W-A1`.
+  This is not Shopify's own "Location," which means a whole site.
 - **Unplaced:** a variant the store lists on a shelf but whose position on a level shelver
   does not know yet.
 - **No location:** a variant the store lists on no shelf at all.

@@ -13,8 +13,8 @@ database.
 | Shelf view: move, reorder, add, and remove products | Yes | Yes |
 | Begin and complete audits | Yes | Yes |
 | Cancel or take over another user's audit | No | Yes |
-| Floor Plans: create, delete, edit structure | No | Yes |
-| Shelves: add, move, delete, change levels, rename | No | Yes |
+| Buildings: create, delete, edit structure | No | Yes |
+| Rooms and shelves: add, move, delete, change levels, reorganize | No | Yes |
 | Settings and Users | No | Yes |
 
 Permissions are enforced on the server for each controller. Hiding a navigation link is a
@@ -39,10 +39,10 @@ handles password hashing.
   untouched. Also used to create the first Administrator.
 - `reset_users.py`: deletes every account, then creates a new Administrator. History keeps the
   copied names.
-- `reset_floor_plans.py`: deletes every floor plan and everything in it, including its
-  shelves, change history, and audits. Accounts are untouched.
+- `reset_buildings.py`: deletes every building and everything in it, including its shelves,
+  change history, and audits. Accounts are untouched.
 
-Running `reset_floor_plans.py` and `reset_users.py` together gives a clean slate. Settings are
+Running `reset_buildings.py` and `reset_users.py` together gives a clean slate. Settings are
 configuration rather than data, so neither script resets them. To start from a completely
 blank database, for example after breaking a migration during development, delete the
 database file while the app is stopped.

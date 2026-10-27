@@ -69,6 +69,8 @@ Implementations:
   2. Update every variant from the old name to the new one.
   3. Remove the old name.
   If step 2 fails partway, the shelf is shown as partly renamed and the rename can be retried.
+- A batch of renames that swaps or chains names, such as A3 to A4 while A4 becomes A3, goes
+  through temporary names so no two shelves ever share a name.
 - Moving variants between shelves follows the same read, change, and write pattern.
 - New names added to the approved list in the store appear in shelver as shelves that are not
   placed on any floor yet.

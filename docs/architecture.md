@@ -20,13 +20,13 @@
 | Accounts | ASP.NET Core Identity with roles | Planned |
 | Partial page updates | htmx: controller actions return partial views | Planned |
 | Reordering variants on a shelf | SortableJS with its MultiDrag plugin | Planned |
-| Floor plan editing | interact.js on the server-rendered SVG | Planned |
+| Building editor | interact.js on the server-rendered SVG | Planned |
 | Tests | xUnit with in-memory integration tests through `WebApplicationFactory` | Built |
 | Tool scripts | Python run through uv | Built |
 
 ## Devices
 
-- Floor Plans editing is designed for a desktop with a mouse.
+- The building editor is designed for a desktop with a mouse.
 - Home and the shelf view are designed for a tablet: touch input, large tap targets, and no
   behavior that depends on hovering.
 
