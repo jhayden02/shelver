@@ -1,6 +1,6 @@
 # ![shelver](res/img/banner.svg)
 
-A inventory location management software for small organizations.
+An inventory location management software for small organizations.
 
 shelver interacts with an inventory database (like Shopify) to help manage a local layout of
 shelving.
