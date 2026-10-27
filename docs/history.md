@@ -7,14 +7,14 @@ when they were last checked.
 
 **Status: planned.**
 
-Every change shelver makes to a shelf's contents is recorded: a product moved, added,
-removed, or reordered. Each entry stores what changed, on which shelf, when, and who made it.
+Every change shelver makes to a shelf's contents is recorded: a variant moved, added, or
+removed. Each entry stores what changed, on which shelf, when, and who made it.
 
 - "Last adjusted" for a shelf comes from its most recent entry.
 - Edits do not require an audit. Changes made while restocking are recorded the same way as
   changes made during an audit.
 - shelver only knows about changes it makes. A change made directly in the store is noticed
-  the next time shelver reads that product, and is recorded as "changed outside shelver" with
+  the next time shelver reads that variant, and is recorded as "changed outside shelver" with
   the time it was detected. Who made it and exactly when are unknown.
 
 ## Audits

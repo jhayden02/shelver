@@ -19,7 +19,7 @@
 | Database | SQLite through EF Core; migrations applied at startup | Built |
 | Accounts | ASP.NET Core Identity with roles | Planned |
 | Partial page updates | htmx: controller actions return partial views | Planned |
-| Reordering variants on a shelf | SortableJS with its MultiDrag plugin | Planned |
+| Moving variants between levels | SortableJS with its MultiDrag plugin | Planned |
 | Building editor | interact.js on the server-rendered SVG | Planned |
 | Tests | xUnit with in-memory integration tests through `WebApplicationFactory` | Built |
 | Tool scripts | Python run through uv | Built |

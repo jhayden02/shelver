@@ -45,7 +45,8 @@ store does not have.
 - **Shelf:** one shelving unit placed in a room. It has a permanent internal ID, a name, a
   position, and a number of levels. Its name is assigned from its building, room, and number,
   for example `W-A1`, and changes only on request.
-- **Level:** one horizontal tier of a shelf, holding variants in a saved order.
+- **Level:** one tier of a shelf, such as a shelf board, drawer, or top surface. A variant's
+  place within a shelf is one or more levels; arrangement within a level is not tracked.
 - **Product:** an item in the store, with a title and one or more variants.
 - **Variant:** one version of a product, such as a size or color, with its own SKU, quantity,
   and image (the product's image when it has none). Variants are what sit on shelves, and
@@ -55,8 +56,7 @@ store does not have.
   the shelves a variant is on. See [data.md](data.md#store-interface).
 - **Location name:** a shelf's name as stored in the location field, for example `W-A1`.
   This is not Shopify's own "Location," which means a whole site.
-- **Unplaced:** a variant the store lists on a shelf but whose position on a level shelver
-  does not know yet.
+- **Unplaced:** a variant the store lists on a shelf without a known level.
 - **No location:** a variant the store lists on no shelf at all.
 - **Audit:** a recorded check of one shelf by one user, from beginning to completion.
 

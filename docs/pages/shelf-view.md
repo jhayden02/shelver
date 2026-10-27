@@ -14,21 +14,20 @@ Auditors and Administrators. Designed for a tablet.
 
 ## Layout
 
-- The shelf is drawn as its levels, top to bottom, each showing its variants in their saved
-  order.
+- The shelf is drawn as its levels, top to bottom, each listing its variants sorted by title,
+  then SKU. A variant on several levels appears on each.
 - Each variant shows its picture, SKU, and quantity.
 - A variant on several shelves shows the store's total quantity and lists its other shelves.
   See [data.md](../data.md#quantities).
-- An **unplaced** area holds variants the store lists on this shelf without a saved level and
-  order, such as those added in the store. Placing them is optional.
+- An **unplaced** area holds variants the store lists on this shelf without a known level,
+  such as those added in the store. Placing them is optional.
 
 ## Editing
 
 All edits are recorded in the [change history](../history.md) and do not require an audit.
 
-- **Reorder and move between levels:** drag a variant to a new position, including to and
-  from the unplaced area. Built with SortableJS; each drop is saved through a controller
-  action.
+- **Move between levels:** drag a variant to another level, or to or from the unplaced area.
+  Built with SortableJS; each drop is saved through a controller action.
 - **Select several:** tap variants to select them, then act on all of them at once.
 - **Move to another shelf:** the variants arrive unplaced on the chosen shelf.
 - **Move to nowhere:** removes this shelf from the variants' location fields. A variant on no
@@ -42,8 +41,8 @@ Moves, adds, and removals update location fields in the store following the
 
 - **Begin audit** starts an audit of this shelf for the signed-in user. It is unavailable
   while another user has an open audit here, and shows who and since when.
-- The user checks the number of variants, their arrangement, and each quantity, fixing
-  anything wrong with the edits above.
+- The user checks that each variant is on the right level and that each quantity is correct,
+  fixing anything wrong with the edits above.
 - **Complete audit** records the audit, even when nothing changed.
 - Administrators can cancel or take over another user's open audit.
 

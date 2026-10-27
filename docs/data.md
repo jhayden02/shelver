@@ -11,7 +11,7 @@ data the store owns.
 | Which shelves each variant is on (location names) | Store |
 | Buildings, floors, walls, doors, stairs | shelver |
 | Shelves: ID, name, position, level count | shelver |
-| A variant's level and order within a shelf | shelver |
+| Which levels a variant is on within each shelf | shelver |
 | Change history and audit records | shelver |
 | Settings and user accounts | shelver |
 
@@ -94,3 +94,6 @@ exactly 304.8 mm.
 - Whether the API allows updating a metafield definition's approved choices.
 - Whether Shopify caps the number of choices. If the cap is below a store's shelf count, drop
   the choice list and have shelver check names itself.
+- Whether levels should live in Shopify instead: a "Shelf level" metaobject (building, shelf,
+  level) with variants referencing the entries they sit on. To be tried on the development
+  store, checking validation, admin and export display, and the API.

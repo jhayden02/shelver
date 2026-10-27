@@ -10,7 +10,7 @@ database.
 | | Auditor | Administrator |
 |---|---|---|
 | Home, product search, No location list | Yes | Yes |
-| Shelf view: move, reorder, add, and remove products | Yes | Yes |
+| Shelf view: move, add, and remove variants | Yes | Yes |
 | Begin and complete audits | Yes | Yes |
 | Cancel or take over another user's audit | No | Yes |
 | Buildings: create, delete, edit structure | No | Yes |
