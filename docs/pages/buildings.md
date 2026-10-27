@@ -107,10 +107,17 @@ The goal is predictability: from any shelf, higher numbers are to its right.
   [shelf view](shelf-view.md).
 - Names found in the store that match no shelf are listed in Shelves mode to be placed.
 
+## Deleting a building
+
+**Status: planned.**
+
+- A building can only be deleted when all its shelves are empty, checked against the store.
+- **Move everything to nowhere** empties every shelf in the building at once. It shows how many
+  variants and shelves are affected.
+- Both actions require typing the building's code to confirm.
+
 ## Open questions
 
-- Deleting a building whose shelves still hold variants: blocked, or allowed after a
-  confirmation.
 - Whether a Done building can return to Setup, or only have its structure unlocked.
 - Whether shelves and rooms can be rotated, or only placed square to the floor.
 - Whether shelves can be placed outside any room, and how they are named.
