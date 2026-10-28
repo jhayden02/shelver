@@ -10,7 +10,8 @@ The built pages still use the earlier single-floor model under the name Floor Pl
 
 **Status: built as Floor Plans.**
 
-- Lists every building with its code, number of floors, and state, and a link to edit it.
+- Lists every building with its code, number of floors, and any flagged problems, and a link
+  to edit it.
 - With no buildings, the page shows only a centered "Create building" button in the space a
   floor would fill.
 
@@ -21,11 +22,12 @@ The built pages still use the earlier single-floor model under the name Floor Pl
 - **Name:** required, at most 100 characters.
 - **Code:** required, one letter A–Z, unique across buildings. Starts every shelf name in the
   building.
-- **Number of floors:** fixed; a building never gains or loses floors.
+- **Number of floors:** fixed after creation.
 - **Floor 1 width and height** in decimal feet, 3–3,000 ft. Other floors start with the same
   size and no offset.
 
-A new building starts in Setup and opens in the editor.
+A new building opens in guided setup. Everything here except the number of floors can be
+changed later.
 
 ## Floors
 
@@ -34,30 +36,46 @@ A new building starts in Setup and opens in the editor.
 - Numbered 1, 2, 3 upward.
 - Each has its own width, height, and offset within the building's shared coordinates, so a
   point on one floor is directly above the same point on the floor below.
+- The number of floors never changes. A building created with the wrong count is deleted and
+  created again.
 
 ## Editor
 
 **Status: planned.**
 
-Edits one floor at a time, with a floor picker. Two modes; the other mode's layer stays visible
-but faded and cannot be clicked.
+Edits one floor at a time, with a floor picker, in three steps. Each step depends on the ones
+before it. Layers from other steps stay visible but faded and cannot be clicked.
 
-- **Structure:** walls, doors, and stairs.
-  - Walls are segments with draggable endpoints and snapping. "Add wall" drops in a segment.
-  - Stairs are rectangles with a marked top and bottom side, linking a floor to the one above.
-    They appear on both floors.
-- **Shelves:** rooms and shelves.
+1. **Size and floors:** each floor's size and offset.
+2. **Structure:** walls, doors, and stairs.
+   - Walls are segments with draggable endpoints and snapping. "Add wall" drops in a segment.
+   - Stairs are rectangles with a marked top and bottom side, linking a floor to the one above.
+     They appear on both floors.
+3. **Rooms and shelves.**
 
 All dragging and resizing uses interact.js on the server-rendered SVG; each change is saved
 through a controller action.
 
-## Setup and Done
+## Setup and changes
 
 **Status: planned.**
 
-- A building starts in **Setup**; the editor opens in Structure mode.
-- Marking it **Done** locks Structure mode (unlocking needs a confirmation), opens the editor
-  in Shelves mode from then on, and makes the building available on [Home](home.md).
+- **Guided setup:** a new building goes through the three steps in order. A step opens once the
+  previous step's checks pass.
+- The building appears on [Home](home.md) once it has a room.
+- Afterwards, an Administrator can return to any step at any time. There is no lock.
+- A change re-checks every later step and flags what no longer fits, without moving or
+  deleting anything. Flagged items are listed in the editor as a to-do list. Store data is
+  untouched, so Home keeps working.
+- Changing the building code or a room letter renames shelves, and goes through the same plan
+  and confirmation as [reorganize mode](#reorganize-mode).
+
+### Checks
+
+- Every wall, door, stair, room, and shelf lies within its floor.
+- Every floor above floor 1 is reached by at least one stair.
+- No room crosses a wall.
+- Every room's entrance is a door on its edge.
 
 ## Rooms
 
@@ -118,7 +136,6 @@ The goal is predictability: from any shelf, higher numbers are to its right.
 
 ## Open questions
 
-- Whether a Done building can return to Setup, or only have its structure unlocked.
 - Whether shelves and rooms can be rotated, or only placed square to the floor.
 - Whether shelves can be placed outside any room, and how they are named.
 - What happens to existing store names that do not follow the `BUILDING-ROOM` format when a

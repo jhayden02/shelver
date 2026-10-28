@@ -10,13 +10,12 @@ and Administrators. Designed for a tablet.
 `/` shows "No floor plans are ready yet" with a link to Floor Plans while no floor plan is
 Done, and a placeholder otherwise.
 
-## Floor plan view
+## Floor view
 
 **Status: planned.**
 
-- A picker chooses which Done floor plan to view.
-- The floor plan is drawn with its shelves. Tapping a shelf opens its
-  [shelf view](shelf-view.md).
+- A picker chooses a building and floor. Buildings appear once they have a room.
+- The floor is drawn with its shelves. Tapping a shelf opens its [shelf view](shelf-view.md).
 - Shelves can be listed and sorted by last adjusted or last audited, from
   [history](../history.md).
 
