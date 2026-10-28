@@ -32,8 +32,3 @@ Done, and a placeholder otherwise.
 
 A list of products the store lists on no shelf. It opens full screen like a shelf view and
 offers the same "Move to shelf" action, so lost products can be given a home.
-
-## Open questions
-
-- Where the sortable shelf list appears: beside the floor plan, or as its own view.
-- Whether search covers only the selected floor plan or all of them.

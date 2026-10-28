@@ -87,13 +87,3 @@ shows that total and lists the variant's other shelves.
 
 All lengths are stored as whole millimeters and entered and shown in decimal feet. A foot is
 exactly 304.8 mm.
-
-## Open questions
-
-- Whether the Shopify Admin API supports "write only if unchanged" for metafields.
-- Whether the API allows updating a metafield definition's approved choices.
-- Whether Shopify caps the number of choices. If the cap is below a store's shelf count, drop
-  the choice list and have shelver check names itself.
-- Whether levels should live in Shopify instead: a "Shelf level" metaobject (building, shelf,
-  level) with variants referencing the entries they sit on. To be tried on the development
-  store, checking validation, admin and export display, and the API.

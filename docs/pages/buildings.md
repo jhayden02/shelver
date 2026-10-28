@@ -145,10 +145,3 @@ The goal is predictability: from any shelf, higher numbers are to its right.
 - **Move everything to nowhere** empties every shelf in the building at once. It shows how many
   variants and shelves are affected.
 - Both actions require typing the building's code to confirm.
-
-## Open questions
-
-- Whether shelves and rooms can be rotated, or only placed square to the floor.
-- Whether shelves can be placed outside any room, and how they are named.
-- What happens to existing store names that do not follow the `BUILDING-ROOM` format when a
-  store is first connected.

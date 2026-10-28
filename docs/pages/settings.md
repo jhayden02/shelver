@@ -12,7 +12,3 @@ Settings are stored in the database because `appsettings.json` is only read at s
 
 The store connection (Shopify credentials) is not configured here; it is part of deployment
 configuration.
-
-## Open questions
-
-- The default audit expiry.

@@ -48,7 +48,3 @@ blank database, for example after breaking a migration during development, delet
 database file while the app is stopped.
 
 These scripts replace the current `reset_database.py`.
-
-## Open questions
-
-- What signs a user out: closing the browser, a fixed time limit, or neither.

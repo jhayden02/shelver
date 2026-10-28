@@ -39,8 +39,3 @@ An audit is one user's check of one shelf.
 Each history entry and audit record stores both a link to the user's account and a copy of
 the user's name at the time. If the account is later deleted, the link is cleared and the name
 remains, so history is never lost or left pointing at a missing account.
-
-## Open questions
-
-- Whether changes made during an audit are linked to that audit.
-- What a taken-over audit records: the original user, the new user, or both.

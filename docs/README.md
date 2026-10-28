@@ -11,8 +11,7 @@ Most of shelver is still being designed, so every behavior is marked:
 - **Built:** works in the current code and is covered by tests.
 - **Planned:** decided, but not built yet.
 
-Unsettled decisions are listed under **Open questions** at the bottom of the document they
-concern.
+Unsettled decisions are tracked as GitHub issues.
 
 ## Purpose
 

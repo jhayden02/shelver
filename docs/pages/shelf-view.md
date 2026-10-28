@@ -47,9 +47,3 @@ Moves, adds, and removals update location fields in the store following the
 - Administrators can cancel or take over another user's open audit.
 
 Audit rules, including expiry, are in [history.md](../history.md#audits).
-
-## Open questions
-
-- How the destination shelf is chosen: a searchable list of names, a small floor plan to tap,
-  or both.
-- Whether an audit can record a discrepancy that was found but not fixed.
