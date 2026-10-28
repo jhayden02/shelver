@@ -68,7 +68,7 @@ through a controller action.
   deleting anything. Flagged items are listed in the editor as a to-do list. Store data is
   untouched, so Home keeps working.
 - Changing the building code or a room letter renames shelves, and goes through the same plan
-  and confirmation as [reorganize mode](#reorganize-mode).
+  and confirmation as [changing shelves](#changing-shelves).
 
 ### Checks
 
@@ -86,18 +86,27 @@ through a controller action.
 - Each room has one entrance door, defaulting to the first door on its edge. An Administrator
   can choose another.
 
+## Shelf identity
+
+**Status: planned.**
+
+- Every shelf has a permanent ID (a GUID) that never changes, and a name that can.
+- **ID tag:** applied once to the shelf and never moved. Shows a QR code of the ID and the ID's
+  first 8 characters. Scanning it opens the shelf's [view](shelf-view.md).
+- **Name label:** shows the shelf's current name. When names shift, labels move between
+  shelves.
+
 ## Shelf names
 
 **Status: planned.**
 
 - Shelves are named `BUILDING-ROOM` followed by a number, for example `W-A1`.
-- A new shelf in a room takes the room's next unused number.
-- Names never change unless an Administrator asks, in [reorganize mode](#reorganize-mode).
+- Numbers are applied by the numbering order, never chosen. Every shelf added to, moved within,
+  or deleted from a room renumbers the room; deleting a shelf shifts higher numbers down.
 
 ### Numbering order
 
-Used when a room is numbered or renumbered. Directions are as seen from the room's entrance,
-facing in:
+Directions are as seen from the room's entrance, facing in:
 
 1. Left to right across the room.
 2. Shelves whose left-to-right ranges overlap are numbered from the far side toward the
@@ -105,14 +114,17 @@ facing in:
 
 The goal is predictability: from any shelf, higher numbers are to its right.
 
-## Reorganize mode
+## Changing shelves
 
 **Status: planned.**
 
-1. Move, add, or remove shelves in a room or floor. Nothing is written to the store yet.
-2. Finishing shows a plan: every rename the new layout needs under the numbering order, how
-   many variants each touches, and a printable list of physical labels to change.
+1. Shelf changes in the Rooms and shelves step are held until saved.
+2. Saving shows a plan: every rename and how many variants each touches.
 3. Confirming applies the renames to the store as one batch.
+4. A move diagram of the room shows each affected shelf as ~~`W-A4`~~ `W-A5`, marking which
+   labels move, which are new, and which are left over. Each shelf has a checkbox for when its
+   label is moved.
+5. The room is marked **labels pending** in the editor and on Home until every box is checked.
 
 ## Shelf rules
 

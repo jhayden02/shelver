@@ -14,7 +14,7 @@ database.
 | Begin and complete audits | Yes | Yes |
 | Cancel or take over another user's audit | No | Yes |
 | Buildings: create, delete, edit structure | No | Yes |
-| Rooms and shelves: add, move, delete, change levels, reorganize | No | Yes |
+| Rooms and shelves: add, move, delete, change levels | No | Yes |
 | Settings and Users | No | Yes |
 
 Permissions are enforced on the server for each controller. Hiding a navigation link is a
