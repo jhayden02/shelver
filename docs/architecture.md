@@ -6,6 +6,7 @@
   controller and view; interactive behavior is added on top with JavaScript libraries.
 - **Purpose-built JavaScript libraries over hand-written JavaScript.** Custom JavaScript is
   limited to thin glue between a library and the controllers.
+- **Shopify only.** shelver connects to one Shopify store. See [data.md](data.md).
 - **Locally hosted.** shelver runs on a machine on the same local network as the devices that
   use it, and is not reachable from the internet.
 - **Standard naming for each language:** PascalCase C#, kebab-case CSS and web assets,

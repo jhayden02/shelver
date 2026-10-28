@@ -15,7 +15,7 @@ Unsettled decisions are tracked as GitHub issues.
 
 ## Purpose
 
-shelver is a visual frontend over a store's inventory system (Shopify today). It shows where
+shelver is a visual frontend over a Shopify store's inventory. It shows where
 shelves physically are in a building and which inventory sits on each shelf, so users can:
 
 - Find which shelf holds an item of inventory.
@@ -41,9 +41,9 @@ store does not have.
   lower floor, and the opposite side **top**, where it is entered from the upper floor.
 - **Room:** a lettered rectangle (A–Z) on a floor that groups shelves and has one entrance
   door. Shelf numbering runs from the entrance.
-- **Shelf:** one shelving unit placed in a room. It has a permanent internal ID, a name, a
-  position, and a number of levels. Its name is assigned from its building, room, and number,
-  for example `W-A1`, and changes only on request.
+- **Shelf:** one physical shelving unit, with a permanent ID and a number of levels. While
+  placed in a room it has a position and a name assigned from its building, room, and number,
+  for example `W-A1`. A shelf in no room is **spare**.
 - **Level:** one tier of a shelf, such as a shelf board, drawer, or top surface. A variant's
   place within a shelf is one or more levels; arrangement within a level is not tracked.
 - **Product:** an item in the store, with a title and one or more variants.
@@ -51,10 +51,10 @@ store does not have.
   and image (the product's image when it has none). Variants are what sit on shelves, and
   variants of the same product can be on different shelves. A product without options still
   has one variant.
-- **Location field:** a custom variant field the store owner designates to hold the names of
-  the shelves a variant is on. See [data.md](data.md#store-interface).
-- **Location name:** a shelf's name as stored in the location field, for example `W-A1`.
-  This is not Shopify's own "Location," which means a whole site.
+- **Location field:** the variant metafield listing the shelves a variant is on. See
+  [data.md](data.md#shelves-in-shopify).
+- **Location name:** a shelf's name as it appears in the store, for example `W-A1`. This is
+  not Shopify's own "Location," which means a whole site.
 - **Unplaced:** a variant the store lists on a shelf without a known level.
 - **No location:** a variant the store lists on no shelf at all.
 - **Audit:** a recorded check of one shelf by one user, from beginning to completion.

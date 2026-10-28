@@ -14,6 +14,8 @@ The built pages still use the earlier single-floor model under the name Floor Pl
   to edit it.
 - With no buildings, the page shows only a centered "Create building" button in the space a
   floor would fill.
+- Spare shelves are listed below the buildings by the first 8 characters of their ID, and can
+  be retired from here.
 
 ## Create
 
@@ -81,7 +83,7 @@ through a controller action.
 
 **Status: planned.**
 
-- A room is a rectangle dragged out in Shelves mode that snaps to walls and doors.
+- A room is a rectangle dragged out in the Rooms and shelves step that snaps to walls and doors.
 - Each room has a letter, A–Z, unique within its building.
 - Each room has one entrance door, defaulting to the first door on its edge. An Administrator
   can choose another.
@@ -91,8 +93,11 @@ through a controller action.
 **Status: planned.**
 
 - Every shelf has a permanent ID (a GUID) that never changes, and a name that can.
+- A shelf exists apart from any building. Placing it in a room names it. A shelf in no room is
+  **spare**: it has no name and cannot hold variants.
 - **ID tag:** applied once to the shelf and never moved. Shows a QR code of the ID and the ID's
-  first 8 characters. Scanning it opens the shelf's [view](shelf-view.md).
+  first 8 characters. Scanning it opens the shelf's [view](shelf-view.md), which says when the
+  shelf is spare or retired.
 - **Name label:** shows the shelf's current name. When names shift, labels move between
   shelves.
 
@@ -102,7 +107,7 @@ through a controller action.
 
 - Shelves are named `BUILDING-ROOM` followed by a number, for example `W-A1`.
 - Numbers are applied by the numbering order, never chosen. Every shelf added to, moved within,
-  or deleted from a room renumbers the room; deleting a shelf shifts higher numbers down.
+  or removed from a room renumbers the room; removing a shelf shifts higher numbers down.
 
 ### Numbering order
 
@@ -126,22 +131,36 @@ The goal is predictability: from any shelf, higher numbers are to its right.
    label is moved.
 5. The room is marked **labels pending** in the editor and on Home until every box is checked.
 
+## Moving shelves
+
+**Status: planned.**
+
+- Within a floor, a shelf can be dragged into another room.
+- **Move to room** moves a shelf to a room on any floor of any building.
+- A move keeps the shelf's ID, tag, history, and variants. It renames the shelf and renumbers
+  both rooms through [changing shelves](#changing-shelves).
+
 ## Shelf rules
 
 **Status: planned.**
 
 - A shelf's level count is set when it is created and can be changed later. Lowering it moves
   variants on removed levels to the unplaced area.
-- A shelf can only be deleted when empty, checked against the store at the moment of deletion.
-  To empty a shelf with no new home for its variants, move them to nowhere in the
-  [shelf view](shelf-view.md).
-- Names found in the store that match no shelf are listed in Shelves mode to be placed.
+- Creating a shelf in a room creates and places it in one step. Spare shelves are listed in
+  the Rooms and shelves step to be placed.
+- A shelf can only be removed from its room when empty, checked against the store at that
+  moment. It becomes spare. To empty a shelf with no new home for its variants, move them to
+  nowhere in the [shelf view](shelf-view.md).
+- Retiring a spare shelf ends its ID. Its history is kept.
+- Names found in the store that match no shelf are listed in the Rooms and shelves step to be
+  placed.
 
 ## Deleting a building
 
 **Status: planned.**
 
 - A building can only be deleted when all its shelves are empty, checked against the store.
+  Its shelves become spare, keeping their IDs, tags, and history.
 - **Move everything to nowhere** empties every shelf in the building at once. It shows how many
   variants and shelves are affected.
 - Both actions require typing the building's code to confirm.
