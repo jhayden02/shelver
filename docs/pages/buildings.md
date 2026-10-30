@@ -14,8 +14,6 @@ The built pages still use the earlier single-floor model under the name Floor Pl
   to edit it.
 - With no buildings, the page shows only a centered "Create building" button in the space a
   floor would fill.
-- Spare shelves are listed below the buildings by the first 8 characters of their ID, and can
-  be retired from here.
 
 ## Create
 
@@ -90,12 +88,12 @@ through a controller action.
 
 **Status: planned.**
 
-- Every shelf has a permanent ID (a GUID) that never changes, and a name that can.
-- A shelf exists apart from any building. Placing it in a room names it. A shelf in no room is
-  **spare**: it has no name and cannot hold variants.
+- A shelf is a Shelf entry in the store. Its ID is the entry's ID, which never changes while
+  the shelf exists. Its name changes with its room and position.
+- Every shelf is in a room.
 - **ID tag:** applied once to the shelf and never moved. Shows a QR code of the ID and the ID's
-  first 8 characters. Scanning it opens the shelf's [view](shelf-view.md), which says when the
-  shelf is spare or retired.
+  number. Scanning it opens the shelf's [view](shelf-view.md), which says when the shelf has
+  been deleted.
 - **Name label:** shows the shelf's current name. When names shift, labels move between
   shelves.
 
@@ -146,21 +144,17 @@ The goal is predictability: from any shelf, higher numbers are to its right.
 - A shelf rotates in 90-degree steps. Its front is clearly marked wherever the shelf is drawn.
 - A shelf's level count is set when it is created and can be changed later. Lowering it moves
   variants on removed levels to the unplaced area.
-- Creating a shelf in a room creates and places it in one step. Spare shelves are listed in
-  the Rooms and shelves step to be placed.
-- A shelf can only be removed from its room when empty, checked against the store at that
-  moment. It becomes spare. To empty a shelf with no new home for its variants, move them to
-  nowhere in the [shelf view](shelf-view.md).
-- Retiring a spare shelf ends its ID. Its history is kept.
-- Shelf entries found in the store that match no shelf are listed in the Rooms and shelves
-  step to be placed.
+- Shelves are created in a room.
+- A shelf can only be deleted when empty, checked against the store at that moment. Its
+  history is kept. To empty a shelf with no new home for its variants, move them to nowhere in
+  the [shelf view](shelf-view.md).
 
 ## Deleting a building
 
 **Status: planned.**
 
 - A building can only be deleted when all its shelves are empty, checked against the store.
-  Its shelves become spare, keeping their IDs, tags, and history.
+  Its shelves are deleted with it. Their history is kept.
 - **Move everything to nowhere** empties every shelf in the building at once. It shows how many
   variants and shelves are affected.
 - Both actions require typing the building's name to confirm.

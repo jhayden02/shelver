@@ -42,9 +42,9 @@ store does not have.
 - **Room:** a named area of a floor, enclosed by walls and doors, that groups shelves and has
   one entrance door. Its name, such as `A`, is unique across all buildings. Shelf numbering
   runs from the entrance.
-- **Shelf:** one physical shelving unit, with a permanent ID, a width, a depth, a front, and a
-  number of levels. While placed in a room it has a position and a name assigned from its room
-  and number, for example `A1`. A shelf in no room is **spare**.
+- **Shelf:** one physical shelving unit in a room, stored in the store as a Shelf entry whose ID
+  is permanent. It has a width, a depth, a front, a number of levels, a position, and a name
+  assigned from its room and number, for example `A1`.
 - **Level:** one tier of a shelf, such as a shelf board, drawer, or top surface. A variant's
   place within a shelf is one or more levels; arrangement within a level is not tracked.
 - **Product:** an item in the store, with a title and one or more variants.

@@ -8,10 +8,11 @@ data the store owns.
 | Data | Owner |
 |---|---|
 | Products and variants: title, SKU, image, total quantity | Store |
+| Shelves: ID, room, position, name | Store, written only by shelver |
 | Which shelves each variant is on | Store |
 | Buildings, floors, walls, doors, stairs | shelver |
 | Rooms | shelver, which copies room names to the store |
-| Shelves: ID, name, placement, level count | shelver, which copies each placed shelf's room, position, and name to the store |
+| Shelf placement on the floor, width, depth, front, rotation, level count | shelver, keyed by the shelf's ID |
 | Which levels a variant is on within each shelf | shelver |
 | Change history and audit records | shelver |
 | Settings and user accounts | shelver |
@@ -42,7 +43,8 @@ Implementations:
 
 On connection, shelver creates two definitions in the store:
 
-- **Shelf** metaobject, one entry per placed shelf:
+- **Shelf** metaobject, owned by shelver as an app type (`$app:shelf`) that staff can only
+  read. Shelves are created, changed, and deleted only through shelver. One entry per shelf:
 
   | Field | Type | Required |
   |---|---|---|
@@ -60,13 +62,11 @@ Rules:
   [#5](https://github.com/jhayden02/shelver/issues/5) and
   [#6](https://github.com/jhayden02/shelver/issues/6). If not, Room becomes plain text checked
   by shelver.
-- shelver keeps each placed shelf's entry ID. The entry does not hold shelver's shelf ID.
-- Placing a shelf creates its entry. Any change to its room or position updates only the
-  entry; variants follow the reference. Removing it from its room deletes the entry and clears
-  the ID.
-- Whether staff can edit entries in the Shopify admin is open in
-  [#21](https://github.com/jhayden02/shelver/issues/21). How references behave in the admin,
-  in exports, and on deletion is open in [#22](https://github.com/jhayden02/shelver/issues/22).
+- A shelf's ID is its entry's Shopify ID.
+- Creating a shelf creates its entry. Any change to its room or position updates only the
+  entry; variants follow the reference. Deleting the shelf deletes the entry.
+- How references behave in the admin, in exports, and on deletion is open in
+  [#22](https://github.com/jhayden02/shelver/issues/22).
 
 ## Sync rules
 

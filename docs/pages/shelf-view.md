@@ -7,8 +7,8 @@ Auditors and Administrators. Designed for a tablet.
 
 ## Navigation
 
-- Each shelf has its own address, `/Shelves/{id}`, so it can be bookmarked or linked, and the
-  browser's back button works.
+- Each shelf has its own address, `/Shelves/{id}`, where `id` is the number in its Shopify ID,
+  so it can be bookmarked or linked, and the browser's back button works.
 - A visible back button always returns to the shelf's floor on [Home](home.md), however the
   shelf was opened.
 

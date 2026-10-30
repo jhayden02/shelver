@@ -40,7 +40,8 @@ handles password hashing.
 - `reset_users.py`: deletes every account, then creates a new Administrator. History keeps the
   copied names.
 - `reset_buildings.py`: deletes every building and everything in it, including its shelves,
-  change history, and audits. Accounts are untouched.
+  change history, and audits. Every Shelf entry in the store is deleted too, even if variants
+  still reference it. Accounts are untouched.
 
 Running `reset_buildings.py` and `reset_users.py` together gives a clean slate. Settings are
 configuration rather than data, so neither script resets them. To start from a completely
