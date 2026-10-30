@@ -77,6 +77,8 @@ Rules:
 - shelver refreshes from the store when a floor or shelf is opened. It does not receive
   push notifications, because a locally hosted install has no public address for webhooks.
 - Moving variants between shelves follows the same read, change, and write pattern.
+- Loading a save is the one exception: it overwrites every location field without keeping
+  store changes. See [Recovery](accounts.md#recovery).
 
 ## Quantities
 

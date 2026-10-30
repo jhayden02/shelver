@@ -94,6 +94,9 @@ through a controller action.
 - **ID tag:** applied once to the shelf and never moved. Shows a QR code of the ID and the ID's
   number. Scanning it opens the shelf's [view](shelf-view.md), which says when the shelf has
   been deleted.
+- After a [load](../accounts.md#recovery), every shelf has a new ID, so every ID tag must be
+  replaced. The editor lists every shelf as **tag pending**, with a checkbox ticked by hand
+  once its new tag is applied. Printing tags is left to the organization.
 - **Name label:** shows the shelf's current name. When names shift, labels move between
   shelves.
 

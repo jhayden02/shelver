@@ -63,7 +63,7 @@ store does not have.
 
 - [data.md](data.md): what the store owns, what shelver owns, and how they stay in sync.
 - [history.md](history.md): change history and audit records.
-- [accounts.md](accounts.md): roles, permissions, and administrator recovery.
+- [accounts.md](accounts.md): roles, permissions, and recovery.
 - [architecture.md](architecture.md): technical constraints and stack.
 - Pages:
   - [Buildings](pages/buildings.md)
