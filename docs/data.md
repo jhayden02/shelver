@@ -9,8 +9,9 @@ data the store owns.
 |---|---|
 | Products and variants: title, SKU, image, total quantity | Store |
 | Which shelves each variant is on | Store |
-| Buildings, floors, walls, doors, stairs, rooms | shelver |
-| Shelves: ID, name, placement, level count | shelver, which copies names and IDs to the store |
+| Buildings, floors, walls, doors, stairs | shelver |
+| Rooms | shelver, which copies room names to the store |
+| Shelves: ID, name, placement, level count | shelver, which copies each placed shelf's room, position, and name to the store |
 | Which levels a variant is on within each shelf | shelver |
 | Change history and audit records | shelver |
 | Settings and user accounts | shelver |
@@ -26,7 +27,8 @@ The interface can:
 
 - Read products and their variants: title, SKU, image, and total quantity.
 - Read the list of shelves a variant is on, and replace the whole list.
-- Create, rename, and delete the store's copy of a shelf.
+- Create the Shelf and location field definitions, and keep the Room choices in sync.
+- Create, update, and delete Shelf entries.
 
 Implementations:
 
@@ -36,15 +38,35 @@ Implementations:
 
 ## Shelves in Shopify
 
-**Status: planned, pending a trial on the development store.**
+**Status: planned.**
 
-- Each placed shelf has a **Shelf** metaobject entry holding its name and ID. shelver writes
-  these entries; they are not edited in Shopify.
-- The **location field** is a variant metafield listing references to the Shelf entries the
-  variant is on. The Shopify admin shows it as shelf names, edited by picking shelves.
-- Renaming a shelf changes only its entry. Variants follow the reference.
-- A spare shelf has no entry. Placing it creates one; removing it from its room deletes it.
-- If the trial fails, shelver uses [text names](#text-names) instead.
+On connection, shelver creates two definitions in the store:
+
+- **Shelf** metaobject, one entry per placed shelf:
+
+  | Field | Type | Required |
+  |---|---|---|
+  | Room | Single line text, choice list of shelver's room names | Yes |
+  | Position | Integer | Yes |
+  | Name | Single line text, Room followed by Position, for example `A5` | Yes |
+
+- **Location field:** a variant metafield holding a list of references to the Shelf entries
+  the variant is on.
+
+Rules:
+
+- The Room choices follow shelver's rooms. Adding, renaming, or deleting a room updates them.
+  Whether the API allows this, and how many choices it allows, is open in
+  [#5](https://github.com/jhayden02/shelver/issues/5) and
+  [#6](https://github.com/jhayden02/shelver/issues/6). If not, Room becomes plain text checked
+  by shelver.
+- shelver keeps each placed shelf's entry ID. The entry does not hold shelver's shelf ID.
+- Placing a shelf creates its entry. Any change to its room or position updates only the
+  entry; variants follow the reference. Removing it from its room deletes the entry and clears
+  the ID.
+- Whether staff can edit entries in the Shopify admin is open in
+  [#21](https://github.com/jhayden02/shelver/issues/21). How references behave in the admin,
+  in exports, and on deletion is open in [#22](https://github.com/jhayden02/shelver/issues/22).
 
 ## Sync rules
 
@@ -59,28 +81,6 @@ Implementations:
 - shelver refreshes from the store when a floor or shelf is opened. It does not receive
   push notifications, because a locally hosted install has no public address for webhooks.
 - Moving variants between shelves follows the same read, change, and write pattern.
-
-## Text names
-
-**Status: fallback.** Used only if Shelf metaobjects are not adopted.
-
-The location field is a variant metafield holding a list of single-line text values, each a
-shelf's name, restricted to a choice list of approved names. Which metafield to use is part
-of the store connection's configuration. Plain text stays readable without shelver.
-
-- The store only holds names, so the name links a shelf to its variants.
-- Renaming a shelf in shelver changes its name, then rewrites it in every variant that lists
-  it. A rename made directly in the store is not recognized: the new name appears as a name
-  that matches no shelf.
-- Renaming happens in this order, because the store rejects names that are not approved:
-  1. Add the new name to the approved list.
-  2. Update every variant from the old name to the new one.
-  3. Remove the old name.
-  If step 2 fails partway, the shelf is shown as partly renamed and the rename can be retried.
-- A batch of renames that swaps or chains names, such as A3 to A4 while A4 becomes A3, goes
-  through temporary names so no two shelves ever share a name.
-- Names that match no shelf, including new names added to the approved list in the store, are
-  listed in the building editor to be placed.
 
 ## Quantities
 

@@ -29,8 +29,8 @@ store does not have.
 ## Concepts
 
 - **Building:** a named site such as "Main Office" or "Warehouse," created and saved as a
-  whole. It has a one-letter **code**, such as `W`, that starts every shelf name in it. Its
-  number of floors is set when it is created and never changes.
+  whole, used only for organization. Its number of floors is set when it is created and never
+  changes.
 - **Floor:** one level of a building, numbered 1, 2, 3 upward. Each floor has its own size,
   structure, and shelves. All floors of a building share one coordinate system, so a point on
   one floor is directly above or below the same point on the others; a smaller floor, such as
@@ -39,11 +39,11 @@ store does not have.
 - **Stairs:** a stairway linking a lower and an upper floor, drawn as a rectangle of any length
   covering the same area on both. One side is marked **bottom**, where it is entered from the
   lower floor, and the opposite side **top**, where it is entered from the upper floor.
-- **Room:** a lettered rectangle (A–Z) on a floor that groups shelves and has one entrance
-  door. Shelf numbering runs from the entrance.
+- **Room:** a named rectangle on a floor that groups shelves and has one entrance door. Its
+  name, such as `A`, is unique across all buildings. Shelf numbering runs from the entrance.
 - **Shelf:** one physical shelving unit, with a permanent ID and a number of levels. While
-  placed in a room it has a position and a name assigned from its building, room, and number,
-  for example `W-A1`. A shelf in no room is **spare**.
+  placed in a room it has a position and a name assigned from its room and number, for
+  example `A1`. A shelf in no room is **spare**.
 - **Level:** one tier of a shelf, such as a shelf board, drawer, or top surface. A variant's
   place within a shelf is one or more levels; arrangement within a level is not tracked.
 - **Product:** an item in the store, with a title and one or more variants.
@@ -51,10 +51,10 @@ store does not have.
   and image (the product's image when it has none). Variants are what sit on shelves, and
   variants of the same product can be on different shelves. A product without options still
   has one variant.
-- **Location field:** the variant metafield listing the shelves a variant is on. See
-  [data.md](data.md#shelves-in-shopify).
-- **Location name:** a shelf's name as it appears in the store, for example `W-A1`. This is
-  not Shopify's own "Location," which means a whole site.
+- **Location field:** the variant metafield listing references to the shelves a variant is
+  on. See [data.md](data.md#shelves-in-shopify).
+- **Location name:** a shelf's name as it appears in the store, for example `A1`. This is not
+  Shopify's own "Location," which means a whole site.
 - **Unplaced:** a variant the store lists on a shelf without a known level.
 - **No location:** a variant the store lists on no shelf at all.
 - **Audit:** a recorded check of one shelf by one user, from beginning to completion.

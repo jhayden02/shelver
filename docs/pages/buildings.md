@@ -10,7 +10,7 @@ The built pages still use the earlier single-floor model under the name Floor Pl
 
 **Status: built as Floor Plans.**
 
-- Lists every building with its code, number of floors, and any flagged problems, and a link
+- Lists every building with its number of floors, and any flagged problems, and a link
   to edit it.
 - With no buildings, the page shows only a centered "Create building" button in the space a
   floor would fill.
@@ -22,8 +22,6 @@ The built pages still use the earlier single-floor model under the name Floor Pl
 **Status: planned.** The built Floor Plans form asks for a name, width, and height.
 
 - **Name:** required, at most 100 characters.
-- **Code:** required, one letter A–Z, unique across buildings. Starts every shelf name in the
-  building.
 - **Number of floors:** fixed after creation.
 - **Floor 1 width and height** in decimal feet, 3–3,000 ft. Other floors start with the same
   size and no offset.
@@ -69,8 +67,8 @@ through a controller action.
 - A change re-checks every later step and flags what no longer fits, without moving or
   deleting anything. Flagged items are listed in the editor as a to-do list. Store data is
   untouched, so Home keeps working.
-- Changing the building code or a room letter renames shelves, and goes through the same plan
-  and confirmation as [changing shelves](#changing-shelves).
+- Renaming a room renames its shelves, and goes through the same plan and confirmation as
+  [changing shelves](#changing-shelves).
 
 ### Checks
 
@@ -84,7 +82,7 @@ through a controller action.
 **Status: planned.**
 
 - A room is a rectangle dragged out in the Rooms and shelves step that snaps to walls and doors.
-- Each room has a letter, A–Z, unique within its building.
+- Each room has a name, unique across all buildings.
 - Each room has one entrance door, defaulting to the first door on its edge. An Administrator
   can choose another.
 
@@ -105,7 +103,7 @@ through a controller action.
 
 **Status: planned.**
 
-- Shelves are named `BUILDING-ROOM` followed by a number, for example `W-A1`.
+- Shelves are named by their room followed by a number, for example `A1`.
 - Numbers are applied by the numbering order, never chosen. Every shelf added to, moved within,
   or removed from a room renumbers the room; removing a shelf shifts higher numbers down.
 
@@ -126,7 +124,7 @@ The goal is predictability: from any shelf, higher numbers are to its right.
 1. Shelf changes in the Rooms and shelves step are held until saved.
 2. Saving shows a plan: every rename and how many variants each touches.
 3. Confirming applies the renames to the store as one batch.
-4. A move diagram of the room shows each affected shelf as ~~`W-A4`~~ `W-A5`, marking which
+4. A move diagram of the room shows each affected shelf as ~~`A4`~~ `A5`, marking which
    labels move, which are new, and which are left over. Each shelf has a checkbox for when its
    label is moved.
 5. The room is marked **labels pending** in the editor and on Home until every box is checked.
@@ -152,7 +150,7 @@ The goal is predictability: from any shelf, higher numbers are to its right.
   moment. It becomes spare. To empty a shelf with no new home for its variants, move them to
   nowhere in the [shelf view](shelf-view.md).
 - Retiring a spare shelf ends its ID. Its history is kept.
-- Names found in the store that match no shelf are listed in the Rooms and shelves step to be
+- Shelf entries found in the store that match no shelf are listed in the Rooms and shelves step to be
   placed.
 
 ## Deleting a building
@@ -163,4 +161,4 @@ The goal is predictability: from any shelf, higher numbers are to its right.
   Its shelves become spare, keeping their IDs, tags, and history.
 - **Move everything to nowhere** empties every shelf in the building at once. It shows how many
   variants and shelves are affected.
-- Both actions require typing the building's code to confirm.
+- Both actions require typing the building's name to confirm.
