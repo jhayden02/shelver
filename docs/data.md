@@ -11,7 +11,7 @@ data the store owns.
 | Shelves: ID, room, position, name | Store, written only by shelver |
 | Which shelves each variant is on | Store |
 | Buildings, floors, walls, doors, stairs | shelver |
-| Rooms | shelver, which copies room names to the store |
+| Rooms | shelver |
 | Shelf placement on the floor, width, depth, front, rotation, level count | shelver, keyed by the shelf's ID |
 | Which levels a variant is on within each shelf | shelver |
 | Change history and audit records | shelver |
@@ -28,7 +28,7 @@ The interface can:
 
 - Read products and their variants: title, SKU, image, and total quantity.
 - Read the list of shelves a variant is on, and replace the whole list.
-- Create the Shelf and location field definitions, and keep the Room choices in sync.
+- Create the Shelf and location field definitions.
 - Create, update, and delete Shelf entries.
 
 Implementations:
@@ -48,7 +48,7 @@ On connection, shelver creates two definitions in the store:
 
   | Field | Type | Required |
   |---|---|---|
-  | Room | Single line text, choice list of shelver's room names | Yes |
+  | Room | Single line text, the room's name | Yes |
   | Position | Integer | Yes |
   | Name | Single line text, Room followed by Position, for example `A5` | Yes |
 
@@ -57,11 +57,6 @@ On connection, shelver creates two definitions in the store:
 
 Rules:
 
-- The Room choices follow shelver's rooms. Adding, renaming, or deleting a room updates them.
-  Whether the API allows this, and how many choices it allows, is open in
-  [#5](https://github.com/jhayden02/shelver/issues/5) and
-  [#6](https://github.com/jhayden02/shelver/issues/6). If not, Room becomes plain text checked
-  by shelver.
 - A shelf's ID is its entry's Shopify ID.
 - Creating a shelf creates its entry. Any change to its room or position updates only the
   entry; variants follow the reference. Deleting the shelf deletes the entry.
