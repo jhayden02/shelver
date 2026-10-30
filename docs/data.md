@@ -66,7 +66,8 @@ Rules:
 - Creating a shelf creates its entry. Any change to its room or position updates only the
   entry; variants follow the reference. Deleting the shelf deletes the entry.
 - How references behave in the admin, in exports, and on deletion is open in
-  [#22](https://github.com/jhayden02/shelver/issues/22).
+  [#22](https://github.com/jhayden02/shelver/issues/22). It decides whether shelver removes a
+  deleted entry from variants' location fields itself.
 
 ## Sync rules
 

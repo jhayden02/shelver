@@ -120,7 +120,7 @@ The goal is predictability: from any shelf, higher numbers are to its right.
 **Status: planned.**
 
 1. Shelf changes in the Rooms and shelves step are held until saved.
-2. Saving shows a plan: every rename and how many variants each touches.
+2. Saving shows a plan of every rename.
 3. Confirming applies the renames to the store as one batch.
 4. A move diagram of the room shows each affected shelf as ~~`A4`~~ `A5`, marking which
    labels move, which are new, and which are left over. Each shelf has a checkbox for when its
@@ -145,16 +145,13 @@ The goal is predictability: from any shelf, higher numbers are to its right.
 - A shelf's level count is set when it is created and can be changed later. Lowering it moves
   variants on removed levels to the unplaced area.
 - Shelves are created in a room.
-- A shelf can only be deleted when empty, checked against the store at that moment. Its
-  history is kept. To empty a shelf with no new home for its variants, move them to nowhere in
-  the [shelf view](shelf-view.md).
+- Deleting a shelf deletes its entry and keeps its history. Variants on no other shelf then
+  appear in the No location list on [Home](home.md).
 
 ## Deleting a building
 
 **Status: planned.**
 
-- A building can only be deleted when all its shelves are empty, checked against the store.
-  Its shelves are deleted with it. Their history is kept.
-- **Move everything to nowhere** empties every shelf in the building at once. It shows how many
-  variants and shelves are affected.
-- Both actions require typing the building's name to confirm.
+- Deleting a building deletes its shelves, following the [shelf rules](#shelf-rules).
+- The confirmation shows how many shelves and variants are affected, and requires typing the
+  building's name.

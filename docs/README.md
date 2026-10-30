@@ -20,8 +20,8 @@ shelves physically are in a building and which inventory sits on each shelf, so 
 
 - Find which shelf holds an item of inventory.
 - Audit a shelf by comparing it, level by level, against what the store says is on it.
-- Move inventory between shelves, and rename or rearrange shelves, without editing dozens of
-  items by hand in the store.
+- Move inventory between shelves, and rearrange shelves, without editing items by hand in the
+  store.
 
 The store remains the system of record for inventory. shelver adds the spatial knowledge the
 store does not have.
@@ -53,9 +53,8 @@ store does not have.
   variants of the same product can be on different shelves. A product without options still
   has one variant.
 - **Location field:** the variant metafield listing references to the shelves a variant is
-  on. See [data.md](data.md#shelves-in-shopify).
-- **Location name:** a shelf's name as it appears in the store, for example `A1`. This is not
-  Shopify's own "Location," which means a whole site.
+  on. This is not Shopify's own "Location," which means a whole site. See
+  [data.md](data.md#shelves-in-shopify).
 - **Unplaced:** a variant the store lists on a shelf without a known level.
 - **No location:** a variant the store lists on no shelf at all.
 - **Audit:** a recorded check of one shelf by one user, from beginning to completion.
