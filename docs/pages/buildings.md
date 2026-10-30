@@ -75,16 +75,16 @@ through a controller action.
 - Every wall, door, stair, room, and shelf lies within its floor.
 - Every floor above floor 1 is reached by at least one stair.
 - No room crosses a wall.
-- Every room's entrance is a door on its edge.
+- Every room's entrance is a door on its boundary.
 
 ## Rooms
 
 **Status: planned.**
 
-- A room is a rectangle dragged out in the Rooms and shelves step that snaps to walls and doors.
+- A room is an area selected in the Rooms and shelves step, bounded by walls and doors.
 - Each room has a name, unique across all buildings.
-- Each room has one entrance door, defaulting to the first door on its edge. An Administrator
-  can choose another.
+- Each room has one entrance door, defaulting to the first door on its boundary. An
+  Administrator can choose another.
 
 ## Shelf identity
 
@@ -111,7 +111,7 @@ through a controller action.
 
 Directions are as seen from the room's entrance, facing in:
 
-1. Left to right across the room.
+1. Left to right across the room, by each shelf's footprint as rotated.
 2. Shelves whose left-to-right ranges overlap are numbered from the far side toward the
    entrance.
 
@@ -142,6 +142,8 @@ The goal is predictability: from any shelf, higher numbers are to its right.
 
 **Status: planned.**
 
+- A shelf has a width and depth in decimal feet, and a front along one of its width sides.
+- A shelf rotates in 90-degree steps. Its front is clearly marked wherever the shelf is drawn.
 - A shelf's level count is set when it is created and can be changed later. Lowering it moves
   variants on removed levels to the unplaced area.
 - Creating a shelf in a room creates and places it in one step. Spare shelves are listed in
@@ -150,8 +152,8 @@ The goal is predictability: from any shelf, higher numbers are to its right.
   moment. It becomes spare. To empty a shelf with no new home for its variants, move them to
   nowhere in the [shelf view](shelf-view.md).
 - Retiring a spare shelf ends its ID. Its history is kept.
-- Shelf entries found in the store that match no shelf are listed in the Rooms and shelves step to be
-  placed.
+- Shelf entries found in the store that match no shelf are listed in the Rooms and shelves
+  step to be placed.
 
 ## Deleting a building
 

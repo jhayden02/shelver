@@ -39,11 +39,12 @@ store does not have.
 - **Stairs:** a stairway linking a lower and an upper floor, drawn as a rectangle of any length
   covering the same area on both. One side is marked **bottom**, where it is entered from the
   lower floor, and the opposite side **top**, where it is entered from the upper floor.
-- **Room:** a named rectangle on a floor that groups shelves and has one entrance door. Its
-  name, such as `A`, is unique across all buildings. Shelf numbering runs from the entrance.
-- **Shelf:** one physical shelving unit, with a permanent ID and a number of levels. While
-  placed in a room it has a position and a name assigned from its room and number, for
-  example `A1`. A shelf in no room is **spare**.
+- **Room:** a named area of a floor, enclosed by walls and doors, that groups shelves and has
+  one entrance door. Its name, such as `A`, is unique across all buildings. Shelf numbering
+  runs from the entrance.
+- **Shelf:** one physical shelving unit, with a permanent ID, a width, a depth, a front, and a
+  number of levels. While placed in a room it has a position and a name assigned from its room
+  and number, for example `A1`. A shelf in no room is **spare**.
 - **Level:** one tier of a shelf, such as a shelf board, drawer, or top surface. A variant's
   place within a shelf is one or more levels; arrangement within a level is not tracked.
 - **Product:** an item in the store, with a title and one or more variants.
