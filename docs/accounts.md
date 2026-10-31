@@ -28,8 +28,7 @@ them. Only `reset_all.py` deletes accounts, along with everything else. See
 ## Recovery
 
 Some problems cannot be fixed from inside the app, for example when the only Administrator
-forgets their password or is deactivated by mistake, or when everything has to be reset or
-restored.
+forgets their password, or when everything has to be reset or restored.
 
 Recovery uses a command-line mode of the app, which runs on the server and exits without
 starting the website. Only someone with access to the machine can run it. The tool scripts in
