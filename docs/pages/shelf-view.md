@@ -39,11 +39,5 @@ Moves, adds, and removals update location fields in the store following the
 
 ## Auditing
 
-- **Begin audit** starts an audit of this shelf for the signed-in user. It is unavailable
-  while another user has an open audit here, and shows who and since when.
-- The user checks that each variant is on the right level and that each quantity is correct,
-  fixing anything wrong with the edits above.
-- **Complete audit** records the audit, even when nothing changed.
-- Administrators can cancel or take over another user's open audit.
-
-Audit rules, including expiry, are in [history.md](../history.md#audits).
+**Mark audited** records that the signed-in user confirmed this shelf matches the view. See
+[history.md](../history.md#audits).

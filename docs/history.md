@@ -11,8 +11,7 @@ Every change shelver makes to a shelf's contents is recorded: a variant moved, a
 removed. Each entry stores what changed, on which shelf, when, and who made it.
 
 - "Last adjusted" for a shelf comes from its most recent entry.
-- Edits do not require an audit. Changes made while restocking are recorded the same way as
-  changes made during an audit.
+- Edits do not require an audit.
 - shelver only knows about changes it makes. A change made directly in the store is noticed
   the next time shelver reads that variant, and is recorded as "changed outside shelver" with
   the time it was detected. Who made it and exactly when are unknown.
@@ -21,18 +20,13 @@ removed. Each entry stores what changed, on which shelf, when, and who made it.
 
 **Status: planned.**
 
-An audit is one user's check of one shelf.
+An audit is one user's confirmation that a shelf matches what shelver shows at that moment.
+It records the user and the time, and changes nothing.
 
-- A user begins an audit on a shelf, checks it against the shelf view, and completes it.
-- Completed audits are recorded even when nothing changed. A clean audit is the evidence that
-  the shelf was checked and found correct.
-- "Last audited" for a shelf comes from its most recent completed audit.
-- A shelf can have only one open audit. Beginning an audit on a shelf that already has one is
-  blocked, and shelver shows who has it open and since when.
-- An open audit expires after the time limit set on the [Settings](pages/settings.md) page.
-  Expiry is worked out when the audit is next shown or acted on, not by a background job.
-  Expired audits stay in the history marked as expired.
-- An Administrator can cancel another user's open audit, or take it over.
+- Anything wrong is fixed first, in person or with edits, which are recorded as usual.
+- Quantities are the store's totals, so they can only be checked where the whole quantity is
+  on this shelf.
+- "Last audited" for a shelf comes from its most recent audit.
 
 ## Users in history
 

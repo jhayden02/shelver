@@ -11,11 +11,10 @@ database.
 |---|---|---|
 | Home, product search, No location list | Yes | Yes |
 | Shelf view: move, add, and remove variants | Yes | Yes |
-| Begin and complete audits | Yes | Yes |
-| Cancel or take over another user's audit | No | Yes |
+| Mark shelves audited | Yes | Yes |
 | Buildings: create, delete, edit structure | No | Yes |
 | Rooms and shelves: add, move, delete, change levels | No | Yes |
-| Settings and Users | No | Yes |
+| Users | No | Yes |
 
 Permissions are enforced on the server for each controller. Hiding a navigation link is a
 convenience only; visiting a forbidden address directly is still denied.
@@ -47,8 +46,7 @@ handles password hashing.
   2. Deletes every building and everything in it, including its shelves, change history, and
      audits. Accounts are untouched.
 - `save_state.py`: writes one save file holding everything:
-  - A copy of shelver's database: accounts, settings, buildings, shelves, history, and
-    audits.
+  - A copy of shelver's database: accounts, buildings, shelves, history, and audits.
   - Every Shelf entry: ID, room, position, and name.
   - Every variant's location references.
 - `load_state.py`: restores a save, overwriting both shelver and the store:
@@ -62,8 +60,7 @@ handles password hashing.
   Everything reverts to its state at the save, including accounts deactivated since. Every
   ID tag must then be replaced; see [Shelf identity](pages/buildings.md#shelf-identity).
 
-Running `reset_buildings.py` and `reset_users.py` together gives a clean slate. Settings are
-configuration rather than data, so neither script resets them.
+Running `reset_buildings.py` and `reset_users.py` together gives a clean slate.
 
 Saving and loading require the app to be stopped. A save only loads into the store it came
 from. The save file holds password hashes and store data, so it must be kept private. Shopify

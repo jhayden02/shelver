@@ -57,7 +57,8 @@ store does not have.
   [data.md](data.md#shelves-in-shopify).
 - **Unplaced:** a variant the store lists on a shelf without a known level.
 - **No location:** a variant the store lists on no shelf at all.
-- **Audit:** a recorded check of one shelf by one user, from beginning to completion.
+- **Edit:** moving, adding, or removing variants on a shelf.
+- **Audit:** a recorded confirmation by one user that a shelf matches shelver at that moment.
 
 ## Documents
 
@@ -69,5 +70,4 @@ store does not have.
   - [Buildings](pages/buildings.md)
   - [Home](pages/home.md)
   - [Shelf view](pages/shelf-view.md)
-  - [Settings](pages/settings.md)
   - [Users](pages/users.md)

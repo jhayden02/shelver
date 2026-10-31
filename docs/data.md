@@ -15,7 +15,7 @@ data the store owns.
 | Shelf placement on the floor, width, depth, front, rotation, level count | shelver, keyed by the shelf's ID |
 | Which levels a variant is on within each shelf | shelver |
 | Change history and audit records | shelver |
-| Settings and user accounts | shelver |
+| User accounts | shelver |
 
 ## Store interface
 
