@@ -30,6 +30,6 @@ It records the user and the time, and changes nothing.
 
 ## Users in history
 
-Each history entry and audit record stores both a link to the user's account and a copy of
-the user's name at the time. If the account is later deleted, the link is cleared and the name
-remains, so history is never lost or left pointing at a missing account.
+Each history entry and audit record links to the user's account and shows its current name.
+Accounts are only deleted along with all history, by [`reset_all.py`](accounts.md#recovery),
+so the link is always valid.

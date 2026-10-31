@@ -21,8 +21,9 @@ convenience only; visiting a forbidden address directly is still denied.
 
 ## Deactivation
 
-Accounts are deactivated rather than deleted in normal use, so their history stays linked to
-them. See [history.md](history.md) for how history survives an account that is deleted.
+Accounts cannot be deleted in the app, only deactivated, so their history stays linked to
+them. Only `reset_all.py` deletes accounts, along with everything else. See
+[history.md](history.md#users-in-history).
 
 ## Recovery
 
@@ -37,14 +38,14 @@ handles password hashing.
 
 - `reset_admin.py`: creates an Administrator, or resets one's password. Other accounts are
   untouched. Also used to create the first Administrator.
-- `reset_users.py`: deletes every account, then creates a new Administrator. History keeps the
-  copied names.
 - `reset_buildings.py`:
   1. Deletes the Shelf and Location definitions from the store, which also deletes every
      Shelf entry and every variant's location value. This step does not open or migrate the
      database, so a broken migration cannot block it.
   2. Deletes every building and everything in it, including its shelves, change history, and
      audits. Accounts are untouched.
+- `reset_all.py`: runs `reset_buildings.py`, then deletes every account and creates a new
+  Administrator.
 - `save_state.py`: writes one save file holding everything:
   - A copy of shelver's database: accounts, buildings, shelves, history, and audits.
   - Every Shelf entry: ID, room, position, and name.
@@ -59,8 +60,6 @@ handles password hashing.
 
   Everything reverts to its state at the save, including accounts deactivated since. Every
   ID tag must then be replaced; see [Shelf identity](pages/buildings.md#shelf-identity).
-
-Running `reset_buildings.py` and `reset_users.py` together gives a clean slate.
 
 Saving and loading require the app to be stopped. A save only loads into the store it came
 from. The save file holds password hashes and store data, so it must be kept private. Shopify
