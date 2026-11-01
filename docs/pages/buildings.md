@@ -1,7 +1,7 @@
 # Buildings
 
-Setup for buildings, their floors, rooms, and shelves. Administrators only (planned; open to
-everyone until accounts exist). Designed for a desktop.
+Setup for buildings, their floors, rooms, and shelves. Administrators only. Designed for a
+desktop.
 
 The built pages still use the earlier single-floor model under the name Floor Plans
 (`/FloorPlans`). Everything below describes the building model.

@@ -4,9 +4,13 @@
     int readyFloorPlanCount = Model;
 }
 
-@if (readyFloorPlanCount == 0)
+@if (readyFloorPlanCount == 0 && User.IsInRole(Roles.Administrator))
 {
     <p>No floor plans are ready yet. Set one up in <a asp-controller="FloorPlans" asp-action="Index">Floor Plans</a>.</p>
+}
+else if (readyFloorPlanCount == 0)
+{
+    <p>No floor plans are ready yet. An Administrator sets them up.</p>
 }
 else
 {

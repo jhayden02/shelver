@@ -19,6 +19,7 @@
 ***********************************************************************************************/
 
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
@@ -57,6 +58,14 @@ builder.Services.ConfigureApplicationCookie((CookieAuthenticationOptions options
 {
     options.LoginPath = "/Account/SignIn";
     options.LogoutPath = "/Account/SignOut";
+    options.AccessDeniedPath = "/Account/AccessDenied";
+});
+
+// Every page requires a signed-in user unless it opts out with [AllowAnonymous], so a new
+// controller is protected even if its attributes are forgotten.
+builder.Services.AddAuthorization((AuthorizationOptions options) =>
+{
+    options.FallbackPolicy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
 });
 
 WebApplication app = builder.Build();
@@ -95,7 +104,9 @@ app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.MapStaticAssets();
+// Static files are endpoints too, so they would fall under the sign-in requirement and leave
+// the sign-in page without its styles.
+app.MapStaticAssets().AllowAnonymous();
 
 app.MapControllerRoute(
     name: "default",

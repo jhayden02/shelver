@@ -18,6 +18,7 @@
 *
 ***********************************************************************************************/
 
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -39,6 +40,7 @@ public class AccountController : Controller
         _signInManager = signInManager;
     }
 
+    [AllowAnonymous]
     [HttpGet("Account/SignIn")]
     public async Task<IActionResult> ChooseAccount(string? returnUrl)
     {
@@ -46,6 +48,7 @@ public class AccountController : Controller
         return View(new ChooseAccountViewModel { Usernames = usernames, ReturnUrl = returnUrl });
     }
 
+    [AllowAnonymous]
     [HttpGet("Account/SignIn/{username}")]
     public async Task<IActionResult> EnterPin(string username, string? returnUrl)
     {
@@ -57,6 +60,7 @@ public class AccountController : Controller
         return View(new EnterPinViewModel { Username = user.UserName!, ReturnUrl = returnUrl });
     }
 
+    [AllowAnonymous]
     [HttpPost("Account/SignIn/{username}")]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> EnterPin(string username, EnterPinViewModel form)
@@ -99,6 +103,12 @@ public class AccountController : Controller
     {
         await _signInManager.SignOutAsync();
         return RedirectToAction(nameof(ChooseAccount));
+    }
+
+    [HttpGet("Account/AccessDenied")]
+    public IActionResult AccessDenied()
+    {
+        return View();
     }
 
     // A deactivated account is treated the same as a missing one, so neither can be signed in.

@@ -36,7 +36,7 @@ public class FloorPlansPageTests
     public async Task GetIndex_NoFloorPlans_ShowsOnlyCreateButton()
     {
         using ShelverWebApplicationFactory factory = new ShelverWebApplicationFactory();
-        HttpClient client = factory.CreateClient();
+        HttpClient client = await factory.CreateSignedInClientAsync(Roles.Administrator);
 
         HttpResponseMessage response = await client.GetAsync("/FloorPlans");
         string body = await response.Content.ReadAsStringAsync();
@@ -51,7 +51,7 @@ public class FloorPlansPageTests
     public async Task PostCreate_ValidForm_RedirectsToEdit()
     {
         using ShelverWebApplicationFactory factory = new ShelverWebApplicationFactory();
-        HttpClient client = factory.CreateClient(new WebApplicationFactoryClientOptions { AllowAutoRedirect = false });
+        HttpClient client = await factory.CreateSignedInClientAsync(Roles.Administrator, new WebApplicationFactoryClientOptions { AllowAutoRedirect = false });
 
         HttpResponseMessage response = await PostCreateAsync(client, "Warehouse", "65.5", "40");
 
@@ -63,7 +63,7 @@ public class FloorPlansPageTests
     public async Task PostCreate_ValidForm_SavesFloorPlanInSetupState()
     {
         using ShelverWebApplicationFactory factory = new ShelverWebApplicationFactory();
-        HttpClient client = factory.CreateClient();
+        HttpClient client = await factory.CreateSignedInClientAsync(Roles.Administrator);
 
         await PostCreateAsync(client, "Warehouse", "65.5", "40");
 
@@ -80,7 +80,7 @@ public class FloorPlansPageTests
     public async Task PostCreate_BlankName_ShowsValidationError()
     {
         using ShelverWebApplicationFactory factory = new ShelverWebApplicationFactory();
-        HttpClient client = factory.CreateClient();
+        HttpClient client = await factory.CreateSignedInClientAsync(Roles.Administrator);
 
         HttpResponseMessage response = await PostCreateAsync(client, "", "65.5", "40");
         string body = await response.Content.ReadAsStringAsync();
@@ -93,7 +93,7 @@ public class FloorPlansPageTests
     public async Task PostCreate_WidthOutOfRange_ShowsValidationError()
     {
         using ShelverWebApplicationFactory factory = new ShelverWebApplicationFactory();
-        HttpClient client = factory.CreateClient();
+        HttpClient client = await factory.CreateSignedInClientAsync(Roles.Administrator);
 
         HttpResponseMessage response = await PostCreateAsync(client, "Warehouse", "0", "40");
         string body = await response.Content.ReadAsStringAsync();
@@ -106,7 +106,7 @@ public class FloorPlansPageTests
     public async Task GetIndex_AfterCreate_ListsFloorPlan()
     {
         using ShelverWebApplicationFactory factory = new ShelverWebApplicationFactory();
-        HttpClient client = factory.CreateClient();
+        HttpClient client = await factory.CreateSignedInClientAsync(Roles.Administrator);
         await PostCreateAsync(client, "Warehouse", "65.5", "40");
 
         HttpResponseMessage response = await client.GetAsync("/FloorPlans");
@@ -122,7 +122,7 @@ public class FloorPlansPageTests
     public async Task GetEdit_UnknownId_ReturnsNotFound()
     {
         using ShelverWebApplicationFactory factory = new ShelverWebApplicationFactory();
-        HttpClient client = factory.CreateClient();
+        HttpClient client = await factory.CreateSignedInClientAsync(Roles.Administrator);
 
         HttpResponseMessage response = await client.GetAsync("/FloorPlans/Edit/999");
 

@@ -19,6 +19,7 @@
 ***********************************************************************************************/
 
 using System.Net;
+using Shelver.Models;
 
 namespace Shelver.Tests.Integration;
 
@@ -28,7 +29,7 @@ public class HomePageTests
     public async Task GetIndex_NoFloorPlans_ShowsNotReadyMessage()
     {
         using ShelverWebApplicationFactory factory = new ShelverWebApplicationFactory();
-        HttpClient client = factory.CreateClient();
+        HttpClient client = await factory.CreateSignedInClientAsync(Roles.Auditor);
 
         HttpResponseMessage response = await client.GetAsync("/");
         string body = await response.Content.ReadAsStringAsync();

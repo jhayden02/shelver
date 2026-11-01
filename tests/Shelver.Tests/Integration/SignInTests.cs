@@ -140,11 +140,11 @@ public class SignInTests
         string pinPage = await client.GetStringAsync("/Account/SignIn/auditor");
         Dictionary<string, string> fields = new Dictionary<string, string> { ["Pin"] = Pin, ["__RequestVerificationToken"] = ShelverWebApplicationFactory.ReadAntiforgeryToken(pinPage) };
         HttpResponseMessage response = await client.PostAsync("/Account/SignIn/former", new FormUrlEncodedContent(fields));
-        string homePage = await client.GetStringAsync("/");
+        HttpResponseMessage homeResponse = await client.GetAsync("/");
 
         Assert.Equal(HttpStatusCode.Redirect, response.StatusCode);
         Assert.StartsWith("/Account/SignIn", response.Headers.Location?.OriginalString);
-        Assert.DoesNotContain("Sign out", homePage);
+        Assert.StartsWith("/Account/SignIn", homeResponse.Headers.Location?.PathAndQuery);
     }
 
     [Fact]

@@ -18,6 +18,7 @@
 *
 ***********************************************************************************************/
 
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Shelver.Data;
@@ -25,6 +26,7 @@ using Shelver.Models;
 
 namespace Shelver.Controllers;
 
+[Authorize(Roles = Roles.Administrator)]
 public class FloorPlansController : Controller
 {
     private readonly ShelverDbContext _database;

@@ -18,6 +18,7 @@
 *
 ***********************************************************************************************/
 
+using System.Net;
 using System.Text.RegularExpressions;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -61,6 +62,20 @@ public class ShelverWebApplicationFactory : WebApplicationFactory<Program>
         IdentityResult roleResult = await userManager.AddToRoleAsync(user, roleName);
         Assert.True(roleResult.Succeeded, string.Join(" ", roleResult.Errors.Select((IdentityError error) => error.Description)));
         return user;
+    }
+
+    public const string SignedInPin = "246802";
+
+    // This creates an account with the given role, named after the role in lowercase, and
+    // returns a client already signed in to it.
+    public async Task<HttpClient> CreateSignedInClientAsync(string roleName, WebApplicationFactoryClientOptions? options = null)
+    {
+        string username = roleName.ToLowerInvariant();
+        await CreateUserAsync(username, SignedInPin, roleName);
+        HttpClient client = CreateClient(options ?? new WebApplicationFactoryClientOptions());
+        HttpResponseMessage response = await PostPinAsync(client, username, SignedInPin);
+        Assert.True(response.StatusCode == HttpStatusCode.Redirect || response.IsSuccessStatusCode, $"Signing in as {username} failed with {response.StatusCode}.");
+        return client;
     }
 
     // This signs in the way a browser does: it loads the PIN page first so the client holds the

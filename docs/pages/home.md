@@ -7,8 +7,8 @@ and Administrators. Designed for a tablet.
 
 **Status: built.**
 
-`/` shows "No floor plans are ready yet" with a link to Floor Plans while no floor plan is
-Done, and a placeholder otherwise.
+`/` shows "No floor plans are ready yet" while no floor plan is Done, with a link to Floor
+Plans for Administrators, and a placeholder otherwise.
 
 ## Floor view
 
