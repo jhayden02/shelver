@@ -25,6 +25,20 @@ Accounts cannot be deleted in the app, only deactivated, so their history stays 
 them. Only `reset_all.py` deletes accounts, along with everything else. See
 [history.md](history.md#users-in-history).
 
+## Sign-out
+
+A user is signed out when the browser closes, or when either time limit runs out:
+
+| | Auditor | Administrator |
+|---|---|---|
+| Idle | 15 minutes | 1 hour |
+| Since sign-in | 12 hours | 12 hours |
+
+- The limits follow the account's role, whatever the device, and are set in `appsettings.json`.
+- There is no "Remember me."
+- Browsers that restore sessions when reopened, and tablets that never fully close, stay signed
+  in until a limit runs out.
+
 ## Recovery
 
 Some problems cannot be fixed from inside the app, for example when the only Administrator
