@@ -59,7 +59,14 @@ builder.Services.ConfigureApplicationCookie((CookieAuthenticationOptions options
     options.LoginPath = "/Account/SignIn";
     options.LogoutPath = "/Account/SignOut";
     options.AccessDeniedPath = "/Account/AccessDenied";
+    options.Events.OnSigningIn = SessionValidator.StampSignInAsync;
+    options.Events.OnValidatePrincipal = SessionValidator.ValidateAsync;
 });
+
+builder.Services.AddOptions<SignOutLimitsOptions>().Bind(builder.Configuration.GetSection(SignOutLimitsOptions.SectionName)).Validate((SignOutLimitsOptions limits) => limits.IsValid(), "Every sign-out limit must be greater than zero.").ValidateOnStart();
+
+// Times are read through TimeProvider so tests can move the clock forward.
+builder.Services.AddSingleton(TimeProvider.System);
 
 // Every page requires a signed-in user unless it opts out with [AllowAnonymous], so a new
 // controller is protected even if its attributes are forgotten.

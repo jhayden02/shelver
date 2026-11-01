@@ -23,6 +23,7 @@ using System.Text.RegularExpressions;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Testing;
+using Microsoft.AspNetCore.TestHost;
 using Microsoft.Data.Sqlite;
 using Microsoft.Extensions.DependencyInjection;
 using Shelver.Data;
@@ -36,9 +37,12 @@ public class ShelverWebApplicationFactory : WebApplicationFactory<Program>
 {
     private readonly string _databasePath = Path.Combine(Path.GetTempPath(), $"shelver_test_{Guid.NewGuid():N}.db");
 
+    public AdjustableTimeProvider Clock { get; } = new AdjustableTimeProvider();
+
     protected override void ConfigureWebHost(IWebHostBuilder builder)
     {
         builder.UseSetting("ConnectionStrings:Shelver", $"Data Source={_databasePath}");
+        builder.ConfigureTestServices((IServiceCollection services) => services.AddSingleton<TimeProvider>(Clock));
     }
 
     // This adds test data through the app's own DbContext and returns once it is saved.

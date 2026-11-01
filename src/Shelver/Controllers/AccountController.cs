@@ -33,11 +33,13 @@ public class AccountController : Controller
 {
     private readonly UserManager<ShelverUser> _userManager;
     private readonly SignInManager<ShelverUser> _signInManager;
+    private readonly TimeProvider _timeProvider;
 
-    public AccountController(UserManager<ShelverUser> userManager, SignInManager<ShelverUser> signInManager)
+    public AccountController(UserManager<ShelverUser> userManager, SignInManager<ShelverUser> signInManager, TimeProvider timeProvider)
     {
         _userManager = userManager;
         _signInManager = signInManager;
+        _timeProvider = timeProvider;
     }
 
     [AllowAnonymous]
@@ -85,8 +87,9 @@ public class AccountController : Controller
 
         if (result.IsLockedOut)
         {
+            DateTimeOffset now = _timeProvider.GetUtcNow();
             DateTimeOffset? lockoutEnd = await _userManager.GetLockoutEndDateAsync(user);
-            int minutesLeft = Math.Max(1, (int)Math.Ceiling(((lockoutEnd ?? DateTimeOffset.UtcNow) - DateTimeOffset.UtcNow).TotalMinutes));
+            int minutesLeft = Math.Max(1, (int)Math.Ceiling(((lockoutEnd ?? now) - now).TotalMinutes));
             ModelState.AddModelError("", $"Too many wrong PINs. Try again in {minutesLeft} {(minutesLeft == 1 ? "minute" : "minutes")}.");
         }
         else
