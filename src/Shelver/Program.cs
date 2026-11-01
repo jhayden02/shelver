@@ -27,7 +27,16 @@ using Shelver.Accounts;
 using Shelver.Data;
 using Shelver.Models;
 
-WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
+// A first argument naming a command runs that command and exits without starting the website.
+// The command's arguments are kept away from the builder, which would read them as settings.
+bool isResetAdminCommand = args.Length > 0 && args[0] == ResetAdminCommand.Name;
+WebApplicationBuilder builder = WebApplication.CreateBuilder(isResetAdminCommand ? Array.Empty<string>() : args);
+
+// Commands print their own messages, so the framework's log output is turned off for them.
+if (isResetAdminCommand)
+{
+    builder.Logging.ClearProviders();
+}
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -97,6 +106,11 @@ using (IServiceScope scope = app.Services.CreateScope())
     }
 }
 
+if (isResetAdminCommand)
+{
+    return await ResetAdminCommand.RunAsync(app.Services, args.Skip(1).ToList(), Console.In, Console.Out, Console.Error);
+}
+
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
@@ -120,8 +134,8 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}")
     .WithStaticAssets();
 
-
 app.Run();
+return 0;
 
 // This makes the compiler-generated Program class public so the test project's
 // WebApplicationFactory can start the app.
