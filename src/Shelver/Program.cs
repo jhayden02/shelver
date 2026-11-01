@@ -18,9 +18,11 @@
 *
 ***********************************************************************************************/
 
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
+using Shelver.Accounts;
 using Shelver.Data;
 using Shelver.Models;
 
@@ -36,7 +38,26 @@ connectionStringBuilder.DataSource = Path.Combine(builder.Environment.ContentRoo
 Directory.CreateDirectory(Path.GetDirectoryName(connectionStringBuilder.DataSource)!);
 builder.Services.AddDbContext<ShelverDbContext>((DbContextOptionsBuilder options) => options.UseSqlite(connectionStringBuilder.ConnectionString));
 
-builder.Services.AddIdentityCore<ShelverUser>().AddRoles<IdentityRole>().AddEntityFrameworkStores<ShelverDbContext>();
+// Identity's password rules are all turned off because the credential is a PIN, which
+// PinValidator checks instead.
+builder.Services.AddIdentity<ShelverUser, IdentityRole>((IdentityOptions options) =>
+{
+    options.Password.RequiredLength = PinValidator.PinLength;
+    options.Password.RequireDigit = false;
+    options.Password.RequireLowercase = false;
+    options.Password.RequireUppercase = false;
+    options.Password.RequireNonAlphanumeric = false;
+    options.Password.RequiredUniqueChars = 1;
+    options.Lockout.MaxFailedAccessAttempts = 5;
+    options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
+    options.Lockout.AllowedForNewUsers = true;
+}).AddEntityFrameworkStores<ShelverDbContext>().AddPasswordValidator<PinValidator>();
+
+builder.Services.ConfigureApplicationCookie((CookieAuthenticationOptions options) =>
+{
+    options.LoginPath = "/Account/SignIn";
+    options.LogoutPath = "/Account/SignOut";
+});
 
 WebApplication app = builder.Build();
 
@@ -71,6 +92,7 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapStaticAssets();

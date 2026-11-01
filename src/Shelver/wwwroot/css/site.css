@@ -114,6 +114,32 @@ body {
   stroke-width: 20px;
 }
 
+.page-title {
+  font-size: 1.5rem;
+}
+
+/* Accounts are chosen by touch, so each one is a large button rather than a link. */
+.account-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
+  gap: 0.75rem;
+}
+
+.account-button {
+  padding: 1rem;
+  font-size: 1.25rem;
+  border: 1px solid #000000;
+}
+
+.pin-form {
+  max-width: 20rem;
+}
+
+.pin-input {
+  font-size: 1.5rem;
+  letter-spacing: 0.5rem;
+}
+
 a {
   color: #0000ee;
 }

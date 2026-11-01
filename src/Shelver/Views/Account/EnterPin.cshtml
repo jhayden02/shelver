@@ -1,0 +1,19 @@
+@model EnterPinViewModel
+@{
+    ViewData["Title"] = "Sign In";
+}
+
+<h1 class="page-title">Sign in as @Model.Username</h1>
+
+@* The numeric input mode opens the device's own number pad on a tablet. *@
+<form asp-action="EnterPin" asp-route-username="@Model.Username" method="post" class="pin-form">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input asp-for="ReturnUrl" type="hidden" />
+    <div class="mb-3">
+        <label asp-for="Pin" class="form-label"></label>
+        <input asp-for="Pin" class="form-control pin-input" type="password" inputmode="numeric" autocomplete="current-password" maxlength="6" autofocus />
+        <span asp-validation-for="Pin" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Sign in</button>
+    <a asp-action="ChooseAccount" asp-route-returnUrl="@Model.ReturnUrl" class="btn btn-secondary">Back</a>
+</form>

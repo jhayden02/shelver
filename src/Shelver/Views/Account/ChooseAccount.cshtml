@@ -1,0 +1,20 @@
+@model ChooseAccountViewModel
+@{
+    ViewData["Title"] = "Sign In";
+}
+
+<h1 class="page-title">Sign in</h1>
+
+@if (Model.Usernames.Count == 0)
+{
+    <p>There are no accounts yet. An Administrator is created with <code>tools/reset_admin.py</code>.</p>
+}
+else
+{
+    <div class="account-list">
+        @foreach (string username in Model.Usernames)
+        {
+            <a class="btn btn-light account-button" asp-action="EnterPin" asp-route-username="@username" asp-route-returnUrl="@Model.ReturnUrl">@username</a>
+        }
+    </div>
+}

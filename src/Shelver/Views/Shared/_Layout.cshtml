@@ -27,6 +27,13 @@
                             <a class="nav-link" asp-area="" asp-controller="FloorPlans" asp-action="Index">Floor Plans</a>
                         </li>
                     </ul>
+                    @if (User.Identity?.IsAuthenticated == true)
+                    {
+                        <form asp-controller="Account" asp-action="EndSession" method="post" class="d-flex align-items-center gap-2">
+                            <span>@User.Identity.Name</span>
+                            <button type="submit" class="btn btn-sm btn-light">Sign out</button>
+                        </form>
+                    }
                 </div>
             </div>
         </nav>
