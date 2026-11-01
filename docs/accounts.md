@@ -19,6 +19,13 @@ database.
 Permissions are enforced on the server for each controller. Hiding a navigation link is a
 convenience only; visiting a forbidden address directly is still denied.
 
+## Sign-in
+
+- Accounts have a username and a PIN of exactly 6 digits.
+- The sign-in page lists every active account. Choosing one shows a keypad for its PIN, which
+  can also be typed on a keyboard.
+- Five wrong PINs in a row lock the account for 5 minutes.
+
 ## Deactivation
 
 Accounts cannot be deleted in the app, only deactivated, so their history stays linked to
@@ -42,14 +49,14 @@ A user is signed out when the browser closes, or when either time limit runs out
 ## Recovery
 
 Some problems cannot be fixed from inside the app, for example when the only Administrator
-forgets their password, or when everything has to be reset or restored.
+forgets their PIN, or when everything has to be reset or restored.
 
 Recovery uses a command-line mode of the app, which runs on the server and exits without
 starting the website. Only someone with access to the machine can run it. The tool scripts in
 `tools/` wrap these commands; they never write to the database themselves, so Identity always
-handles password hashing.
+handles PIN hashing.
 
-- `reset_admin.py`: creates an Administrator, or resets one's password. Other accounts are
+- `reset_admin.py`: creates an Administrator, or resets one's PIN. Other accounts are
   untouched. Also used to create the first Administrator.
 - `reset_buildings.py`:
   1. Deletes the Shelf and Location definitions from the store, which also deletes every
@@ -75,7 +82,7 @@ handles password hashing.
   ID tag must then be replaced; see [Shelf identity](pages/buildings.md#shelf-identity).
 
 Saving and loading require the app to be stopped. A save only loads into the store it came
-from. The save file holds password hashes and store data, so it must be kept private. Shopify
+from. The save file holds PIN hashes and store data, so it must be kept private. Shopify
 credentials are not in it, because they are deployment configuration.
 
 These scripts replace the current `reset_database.py`.

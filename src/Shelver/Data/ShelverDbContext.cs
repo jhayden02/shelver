@@ -18,12 +18,14 @@
 *
 ***********************************************************************************************/
 
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Shelver.Models;
 
 namespace Shelver.Data;
 
-public class ShelverDbContext : DbContext
+// The Identity base class adds the tables for accounts, roles, and the links between them.
+public class ShelverDbContext : IdentityDbContext<ShelverUser>
 {
     public ShelverDbContext(DbContextOptions<ShelverDbContext> options) : base(options)
     {

@@ -18,9 +18,11 @@
 *
 ***********************************************************************************************/
 
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using Shelver.Data;
+using Shelver.Models;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
@@ -34,13 +36,28 @@ connectionStringBuilder.DataSource = Path.Combine(builder.Environment.ContentRoo
 Directory.CreateDirectory(Path.GetDirectoryName(connectionStringBuilder.DataSource)!);
 builder.Services.AddDbContext<ShelverDbContext>((DbContextOptionsBuilder options) => options.UseSqlite(connectionStringBuilder.ConnectionString));
 
+builder.Services.AddIdentityCore<ShelverUser>().AddRoles<IdentityRole>().AddEntityFrameworkStores<ShelverDbContext>();
+
 WebApplication app = builder.Build();
 
 // Pending migrations are applied at startup because a locally hosted install has no
-// separate deployment step to run them.
+// separate deployment step to run them. The roles are created afterwards if they are missing.
 using (IServiceScope scope = app.Services.CreateScope())
 {
     scope.ServiceProvider.GetRequiredService<ShelverDbContext>().Database.Migrate();
+
+    RoleManager<IdentityRole> roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+    foreach (string roleName in Roles.All)
+    {
+        if (!await roleManager.RoleExistsAsync(roleName))
+        {
+            IdentityResult result = await roleManager.CreateAsync(new IdentityRole(roleName));
+            if (!result.Succeeded)
+            {
+                throw new InvalidOperationException($"The {roleName} role could not be created: {string.Join(" ", result.Errors.Select((IdentityError error) => error.Description))}");
+            }
+        }
+    }
 }
 
 // Configure the HTTP request pipeline.
