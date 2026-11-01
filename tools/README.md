@@ -10,7 +10,7 @@ instructions [here](https://docs.astral.sh/uv/getting-started/installation/).
 ### On any platform
 
 ```bash
-uv run tools/generate_banner.py
+uv run tools/generate_brand_images.py
 ```
 
 This works on Linux, macOS, and Windows.
@@ -26,22 +26,27 @@ The scripts are executable and start with this line:
 so they can also be run directly, and the system hands them to uv:
 
 ```bash
-./tools/generate_banner.py
+./tools/generate_brand_images.py
 ```
 
 ### Do not run them with python directly
 
-`python3 tools/generate_banner.py` ignores the `# /// script` block. The script then runs on
-whatever Python is on your `PATH`, without its version check and without its dependencies, so
-it may fail or behave differently.
+`python3 tools/generate_brand_images.py` ignores the `# /// script` block. The script then runs
+on whatever Python is on your `PATH`, without its version check and without its dependencies,
+so it may fail or behave differently.
 
 ## Scripts
 
-### generate_banner.py
+### generate_brand_images.py
 
-Writes `res/img/banner.svg`, the README banner, from the site font. Run it after changing the
-font to update the banner. The text is converted to vector paths because GitHub shows README
-images in a sandbox that cannot load web fonts.
+Writes the README banner, `res/img/banner.svg`, and the browser tab icon,
+`src/Shelver/wwwroot/favicon.ico`, from the site font. Run it after changing the font.
+
+- Both are the navbar brand's white box with a black border, holding "shelver" or "s".
+- The banner's text is converted to vector paths because GitHub shows README images in a
+  sandbox that cannot load web fonts.
+- The icon holds 16, 32, 48, and 256 pixel images, each drawn at its own size so its border
+  stays sharp.
 
 ### reset_admin.py
 
