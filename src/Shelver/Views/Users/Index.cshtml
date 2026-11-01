@@ -1,0 +1,36 @@
+@model List<UserListItemViewModel>
+@{
+    ViewData["Title"] = "Users";
+}
+
+<h1 class="page-title">Users</h1>
+
+@if (TempData["StatusMessage"] is string statusMessage)
+{
+    <div class="alert alert-success">@statusMessage</div>
+}
+
+<p>
+    <a class="btn btn-primary" asp-action="Create">Create account</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Username</th>
+            <th>Role</th>
+            <th>Status</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (UserListItemViewModel row in Model)
+        {
+            <tr>
+                <td>@row.Username</td>
+                <td>@row.RoleName</td>
+                <td>@(row.IsActive ? "Active" : "Deactivated")@(row.IsLockedOut ? ", locked" : "")</td>
+                <td><a asp-action="Edit" asp-route-id="@row.Id">Edit</a></td>
+            </tr>
+        }
+    </tbody>
+</table>

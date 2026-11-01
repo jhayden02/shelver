@@ -1,0 +1,50 @@
+@model UserListItemViewModel
+@{
+    ViewData["Title"] = Model.Username;
+}
+
+<h1 class="page-title">@Model.Username</h1>
+<p>@Model.RoleName, @(Model.IsActive ? "active" : "deactivated")@(Model.IsLockedOut ? ", locked after too many wrong PINs" : "").</p>
+
+@if (TempData["StatusMessage"] is string statusMessage)
+{
+    <div class="alert alert-success">@statusMessage</div>
+}
+@if (TempData["ErrorMessage"] is string errorMessage)
+{
+    <div class="alert alert-danger">@errorMessage</div>
+}
+
+@* Each change is a separate form, so saving one never submits the others. *@
+<div class="user-form">
+    <form asp-action="Rename" asp-route-id="@Model.Id" method="post" class="mb-4">
+        <label for="username" class="form-label">Username</label>
+        <div class="input-group">
+            <input id="username" name="username" value="@Model.Username" class="form-control" autocomplete="off" />
+            <button type="submit" class="btn btn-primary">Rename</button>
+        </div>
+    </form>
+
+    <form asp-action="ChangeRole" asp-route-id="@Model.Id" method="post" class="mb-4">
+        <label for="roleName" class="form-label">Role</label>
+        <div class="input-group">
+            <select id="roleName" name="roleName" asp-items="@(new SelectList(Roles.All, Model.RoleName))" class="form-select"></select>
+            <button type="submit" class="btn btn-primary">Change role</button>
+        </div>
+    </form>
+
+    <form asp-action="ResetPin" asp-route-id="@Model.Id" method="post" class="mb-4">
+        <label for="pin" class="form-label">New PIN</label>
+        <div class="input-group">
+            <input id="pin" name="pin" class="form-control pin-input" type="password" inputmode="numeric" autocomplete="new-password" maxlength="6" />
+            <button type="submit" class="btn btn-primary">Reset PIN</button>
+        </div>
+    </form>
+
+    <form asp-action="SetActive" asp-route-id="@Model.Id" method="post" class="mb-4">
+        <input type="hidden" name="isActive" value="@(Model.IsActive ? "false" : "true")" />
+        <button type="submit" class="btn @(Model.IsActive ? "btn-danger" : "btn-secondary")">@(Model.IsActive ? "Deactivate" : "Reactivate")</button>
+    </form>
+
+    <a asp-action="Index">Back to Users</a>
+</div>

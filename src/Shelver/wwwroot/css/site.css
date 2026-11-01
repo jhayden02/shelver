@@ -135,6 +135,10 @@ body {
   max-width: 20rem;
 }
 
+.user-form {
+  max-width: 28rem;
+}
+
 .pin-input {
   font-size: 1.5rem;
   letter-spacing: 0.5rem;

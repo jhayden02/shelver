@@ -96,6 +96,15 @@ public class ShelverWebApplicationFactory : WebApplicationFactory<Program>
         return await client.PostAsync($"/Account/SignIn/{username}", new FormUrlEncodedContent(fields));
     }
 
+    // This posts any form the way a browser does, taking the antiforgery token from the page
+    // the form is on.
+    public static async Task<HttpResponseMessage> PostFormAsync(HttpClient client, string formPagePath, string postPath, Dictionary<string, string> fields)
+    {
+        string formPage = await client.GetStringAsync(formPagePath);
+        Dictionary<string, string> fieldsWithToken = new Dictionary<string, string>(fields) { ["__RequestVerificationToken"] = ReadAntiforgeryToken(formPage) };
+        return await client.PostAsync(postPath, new FormUrlEncodedContent(fieldsWithToken));
+    }
+
     public static string ReadAntiforgeryToken(string page)
     {
         return Regex.Match(page, "name=\"__RequestVerificationToken\" type=\"hidden\" value=\"([^\"]+)\"").Groups[1].Value;
