@@ -87,6 +87,19 @@ public class UsersPageTests
     }
 
     [Fact]
+    public async Task PostCreate_TakenUsername_DoesNotPutPinInPage()
+    {
+        using ShelverWebApplicationFactory factory = new ShelverWebApplicationFactory();
+        HttpClient client = await factory.CreateSignedInClientAsync(Roles.Administrator);
+
+        HttpResponseMessage response = await ShelverWebApplicationFactory.PostFormAsync(client, "/Users/Create", "/Users/Create", new Dictionary<string, string> { ["Username"] = "administrator", ["RoleName"] = Roles.Auditor, ["Pin"] = "864209" });
+        string body = await response.Content.ReadAsStringAsync();
+
+        Assert.Contains("is already taken", body);
+        Assert.DoesNotContain("864209", body);
+    }
+
+    [Fact]
     public async Task PostRename_NewUsername_RenamesAccount()
     {
         using ShelverWebApplicationFactory factory = new ShelverWebApplicationFactory();

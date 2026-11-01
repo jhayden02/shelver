@@ -67,7 +67,7 @@ public class UsersController : Controller
         }
         if (!ModelState.IsValid)
         {
-            return View(form);
+            return ViewWithoutPin(form);
         }
 
         ShelverUser user = new ShelverUser { UserName = form.Username.Trim() };
@@ -75,13 +75,13 @@ public class UsersController : Controller
         if (!createResult.Succeeded)
         {
             AddErrors(createResult);
-            return View(form);
+            return ViewWithoutPin(form);
         }
         IdentityResult roleResult = await _userManager.AddToRoleAsync(user, form.RoleName);
         if (!roleResult.Succeeded)
         {
             AddErrors(roleResult);
-            return View(form);
+            return ViewWithoutPin(form);
         }
 
         TempData[StatusMessageKey] = $"Created {user.UserName}.";
@@ -239,6 +239,15 @@ public class UsersController : Controller
     {
         TempData[ErrorMessageKey] = message;
         return RedirectToAction(nameof(Edit), new { id });
+    }
+
+    // The PIN field is a text field, which would otherwise be refilled with what was typed and
+    // put the PIN in the page's HTML.
+    private IActionResult ViewWithoutPin(CreateUserViewModel form)
+    {
+        ModelState.Remove(nameof(CreateUserViewModel.Pin));
+        form.Pin = "";
+        return View(form);
     }
 
     private void AddErrors(IdentityResult result)

@@ -75,7 +75,7 @@ public class AccountController : Controller
         form.Username = user.UserName!;
         if (!ModelState.IsValid)
         {
-            return View(form);
+            return ViewWithoutPin(form);
         }
 
         // The cookie is not persistent, so the browser drops it when it closes.
@@ -96,6 +96,14 @@ public class AccountController : Controller
         {
             ModelState.AddModelError("", "Wrong PIN.");
         }
+        return ViewWithoutPin(form);
+    }
+
+    // The PIN field is a text field, which would otherwise be refilled with what was typed and
+    // put the PIN in the page's HTML.
+    private IActionResult ViewWithoutPin(EnterPinViewModel form)
+    {
+        ModelState.Remove(nameof(EnterPinViewModel.Pin));
         form.Pin = "";
         return View(form);
     }

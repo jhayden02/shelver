@@ -112,6 +112,32 @@ public class SignInTests
     }
 
     [Fact]
+    public async Task PostPin_WrongPin_DoesNotPutPinInPage()
+    {
+        using ShelverWebApplicationFactory factory = new ShelverWebApplicationFactory();
+        await factory.CreateUserAsync("auditor", Pin, Roles.Auditor);
+        HttpClient client = factory.CreateClient();
+
+        HttpResponseMessage response = await ShelverWebApplicationFactory.PostPinAsync(client, "auditor", "864209");
+        string body = await response.Content.ReadAsStringAsync();
+
+        Assert.Contains("Wrong PIN.", body);
+        Assert.DoesNotContain("864209", body);
+    }
+
+    [Fact]
+    public async Task GetPin_ActiveAccount_AsksForNumericPad()
+    {
+        using ShelverWebApplicationFactory factory = new ShelverWebApplicationFactory();
+        await factory.CreateUserAsync("auditor", Pin, Roles.Auditor);
+        HttpClient client = factory.CreateClient();
+
+        string body = await client.GetStringAsync("/Account/SignIn/auditor");
+
+        Assert.Matches("<input[^>]*type=\"text\"[^>]*inputmode=\"numeric\"[^>]*name=\"Pin\"", body);
+    }
+
+    [Fact]
     public async Task PostPin_FiveWrongPins_LocksAccountEvenForCorrectPin()
     {
         using ShelverWebApplicationFactory factory = new ShelverWebApplicationFactory();

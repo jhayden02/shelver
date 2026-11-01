@@ -36,7 +36,7 @@
     <form asp-action="ResetPin" asp-route-id="@Model.Id" method="post" class="mb-4">
         <label for="pin" class="form-label">New PIN</label>
         <div class="input-group">
-            <input id="pin" name="pin" class="form-control pin-input" type="password" inputmode="numeric" autocomplete="new-password" maxlength="6" />
+            <input id="pin" name="pin" class="form-control pin-input" type="text" inputmode="numeric" pattern="[0-9]*" autocomplete="off" maxlength="6" />
             <button type="submit" class="btn btn-primary">Reset PIN</button>
         </div>
     </form>

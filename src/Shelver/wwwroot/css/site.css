@@ -248,9 +248,12 @@ body {
   font-size: 1.25rem;
 }
 
+/* PIN fields are text fields so phones show their number pad, so the digits are hidden here
+   the way a password field would hide them. */
 .pin-input {
   font-size: 1.5rem;
   letter-spacing: 0.5rem;
+  -webkit-text-security: disc;
 }
 
 a {
