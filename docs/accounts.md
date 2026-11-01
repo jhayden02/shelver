@@ -1,11 +1,11 @@
 # Accounts
 
-**Status: planned.**
-
 Everyone signs in. Accounts are managed by ASP.NET Core Identity and stored in shelver's
 database.
 
 ## Roles
+
+**Status: built for the pages that exist.**
 
 | | Auditor | Administrator |
 |---|---|---|
@@ -21,18 +21,24 @@ convenience only; visiting a forbidden address directly is still denied.
 
 ## Sign-in
 
+**Status: built.**
+
 - Accounts have a username and a PIN of exactly 6 digits.
-- The sign-in page lists every active account. Choosing one shows a keypad for its PIN, which
-  can also be typed on a keyboard.
+- The sign-in page lists every active account. Choosing one asks for its PIN, entered on the
+  device's own number pad or typed on a keyboard.
 - Five wrong PINs in a row lock the account for 5 minutes.
 
 ## Deactivation
+
+**Status: built.**
 
 Accounts cannot be deleted in the app, only deactivated, so their history stays linked to
 them. Only `reset_all.py` deletes accounts, along with everything else. See
 [history.md](history.md#users-in-history).
 
 ## Sign-out
+
+**Status: built.**
 
 A user is signed out when the browser closes, or when either time limit runs out:
 
@@ -47,6 +53,8 @@ A user is signed out when the browser closes, or when either time limit runs out
   in until a limit runs out.
 
 ## Recovery
+
+**Status: `reset_admin.py` is built. The other scripts are planned.**
 
 Some problems cannot be fixed from inside the app, for example when the only Administrator
 forgets their PIN, or when everything has to be reset or restored.

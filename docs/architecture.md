@@ -18,7 +18,7 @@
 |---|---|---|
 | Web framework | ASP.NET Core MVC on .NET 10 | Built |
 | Database | SQLite through EF Core; migrations applied at startup | Built |
-| Accounts | ASP.NET Core Identity with roles | Planned |
+| Accounts | ASP.NET Core Identity with roles | Built |
 | Partial page updates | htmx: controller actions return partial views | Planned |
 | Moving variants between levels | SortableJS with its MultiDrag plugin | Planned |
 | Building editor | interact.js on the server-rendered SVG | Planned |
