@@ -9,7 +9,7 @@ data the store owns.
 |---|---|
 | Products and variants: title, SKU, image, total quantity | Store |
 | Shelves: ID, room, position, name | Store, written only by shelver |
-| Which shelves each variant is on | Store |
+| Which shelves each variant is on | Store, written only by shelver |
 | Buildings, floors, walls, doors, stairs | shelver |
 | Rooms | shelver |
 | Shelf placement on the floor, width, depth, front, rotation, level count | shelver, keyed by the shelf's ID |
@@ -53,7 +53,7 @@ On connection, shelver creates two definitions in the store:
   | Name | Single line text, Room followed by Position, for example `A5` | Yes |
 
 - **Location field:** a variant metafield holding a list of references to the Shelf entries
-  the variant is on.
+  the variant is on. Owned by shelver in its app namespace, so staff can only read it.
 
 Rules:
 
@@ -68,17 +68,17 @@ Rules:
 
 **Status: planned.**
 
-- shelver should be used to change the location field, though it stays editable in Shopify.
-- Before any write, shelver reads the variant's current location field, applies its change to
-  that list, and writes the whole list back. This keeps changes made in the store since
-  shelver last looked.
-- If Shopify supports it, the write only succeeds if the value is unchanged since the read.
-  Otherwise shelver reports the conflict instead of overwriting.
-- shelver refreshes from the store when a floor or shelf is opened. It does not receive
-  push notifications, because a locally hosted install has no public address for webhooks.
-- Moving variants between shelves follows the same read, change, and write pattern.
-- Loading a save is the one exception: it overwrites every location field without keeping
-  store changes. See [Recovery](accounts.md#recovery).
+- Only shelver writes location fields. Before any write, shelver reads the variant's current
+  location field, applies its change to that list, and writes the whole list back. Moving
+  variants between shelves follows the same pattern.
+- Writes are sent in batches of up to 25 variants, the most Shopify allows in one call.
+- How edits by two users at once, or from an out-of-date view, are handled is open in
+  [#32](https://github.com/jhayden02/shelver/issues/32).
+- shelver refreshes products and quantities from the store when a floor or shelf is opened. It
+  does not receive push notifications, because a locally hosted install has no public address
+  for webhooks.
+- Loading a save overwrites every location field from the save. See
+  [Recovery](accounts.md#recovery).
 
 ## Quantities
 

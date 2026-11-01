@@ -19,8 +19,8 @@ Auditors and Administrators. Designed for a tablet.
 - Each variant shows its picture, SKU, and quantity.
 - A variant on several shelves shows the store's total quantity and lists its other shelves.
   See [data.md](../data.md#quantities).
-- An **unplaced** area holds variants the store lists on this shelf without a known level,
-  such as those added in the store. Placing them is optional.
+- An **unplaced** area holds variants the store lists on this shelf without a known level.
+  Placing them is optional.
 
 ## Editing
 
