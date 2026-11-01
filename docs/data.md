@@ -69,11 +69,12 @@ Rules:
 **Status: planned.**
 
 - Only shelver writes location fields. Before any write, shelver reads the variant's current
-  location field, applies its change to that list, and writes the whole list back. Moving
-  variants between shelves follows the same pattern.
+  location field, applies its change to that list, and writes the whole list back.
 - Writes are sent in batches of up to 25 variants, the most Shopify allows in one call.
-- How edits by two users at once, or from an out-of-date view, are handled is open in
-  [#32](https://github.com/jhayden02/shelver/issues/32).
+- A shelf's contents are changed only by the user [editing](pages/shelf-view.md#editing) it,
+  and a building's shelves only while no one is editing them.
+- Writes to the same variant run one at a time. A variant on several shelves can be edited
+  from each of them at once, and every write changes its whole list.
 - shelver refreshes products and quantities from the store when a floor or shelf is opened. It
   does not receive push notifications, because a locally hosted install has no public address
   for webhooks.

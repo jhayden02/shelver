@@ -54,6 +54,16 @@ before it. Layers from other steps stay visible but faded and cannot be clicked.
 All dragging and resizing uses interact.js on the server-rendered SVG; each change is saved
 through a controller action.
 
+### Locks
+
+- Opening a building in the editor locks it to one Administrator. Every shelf view in the
+  building shows "Building being edited by <name>", with Edit and Mark audited disabled.
+- The editor cannot be opened while any shelf in the building is being edited.
+- **Move to room** into another building is refused while that building is locked or has a
+  shelf being edited.
+- Closing the editor releases the lock. After 5 minutes without an action, the editor closes
+  and releases it, and unsaved [shelf changes](#changing-shelves) are discarded.
+
 ## Setup and changes
 
 **Status: planned.**

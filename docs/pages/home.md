@@ -30,5 +30,5 @@ Done, and a placeholder otherwise.
 
 **Status: planned.**
 
-A list of products the store lists on no shelf. It opens full screen like a shelf view and
-offers the same "Move to shelf" action, so lost products can be given a home.
+A list of variants the store lists on no shelf. It opens full screen like a shelf view. A
+variant is given a shelf by adding it from that shelf's [view](shelf-view.md#editing).
