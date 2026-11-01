@@ -1,13 +1,20 @@
 @font-face {
-  font-family: "inconsolata";
-  src: url("../fonts/inconsolata-regular.woff2") format("woff2"), url("../fonts/inconsolata-regular.woff") format("woff");
+  font-family: "roboto";
+  src: url("../fonts/roboto-regular.woff2") format("woff2");
   font-weight: 400;
   font-display: swap;
 }
 
 @font-face {
-  font-family: "inconsolata";
-  src: url("../fonts/inconsolata-bold.woff2") format("woff2"), url("../fonts/inconsolata-bold.woff") format("woff");
+  font-family: "roboto";
+  src: url("../fonts/roboto-medium.woff2") format("woff2");
+  font-weight: 500;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "roboto";
+  src: url("../fonts/roboto-bold.woff2") format("woff2");
   font-weight: 700;
   font-display: swap;
 }
@@ -136,7 +143,7 @@ html {
 
 body {
   margin-bottom: 60px;
-  font-family: "inconsolata", monospace;
+  font-family: "roboto", sans-serif;
   color: var(--color-text);
   background-color: var(--color-background);
 }

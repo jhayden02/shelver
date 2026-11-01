@@ -21,7 +21,7 @@
 
 # /// script
 # requires-python = ">=3.9"
-# dependencies = ["fonttools"]
+# dependencies = ["fonttools[woff]", "uharfbuzz"]
 # ///
 
 # This writes res/img/banner.svg from the site font so the README banner never has to be
@@ -29,9 +29,11 @@
 # in a sandbox that cannot load web fonts. Run it with "uv run tools/generate_banner.py"
 # after changing the font, which installs the Python version and packages listed above.
 
+from io import BytesIO
 from pathlib import Path
 from xml.etree import ElementTree
 
+import uharfbuzz
 from fontTools.misc.transform import Transform
 from fontTools.pens.svgPathPen import SVGPathPen
 from fontTools.pens.transformPen import TransformPen
@@ -39,7 +41,7 @@ from fontTools.ttLib import TTFont
 
 repository_root: Path = Path(__file__).resolve().parent.parent
 fonts_directory: Path = repository_root / "src" / "Shelver" / "wwwroot" / "fonts"
-font_path: Path = fonts_directory / "inconsolata-regular.woff"
+font_path: Path = fonts_directory / "roboto-regular.woff2"
 banner_path: Path = repository_root / "res" / "img" / "banner.svg"
 
 banner_text: str = "shelver"
@@ -66,7 +68,6 @@ def build_banner_svg() -> str:
     units_per_em: int = font["head"].unitsPerEm
     font_ascent: int = font["hhea"].ascent
     font_descent: int = -font["hhea"].descent
-    character_map: dict[int, str] = font.getBestCmap()
     glyph_set = font.getGlyphSet()
     px_per_unit: float = font_size_px / units_per_em
 
@@ -80,23 +81,31 @@ def build_banner_svg() -> str:
     half_leading_px: float = (banner_height_px - content_height_px) / 2
     baseline_y_px: float = half_leading_px + font_ascent * px_per_unit
 
-    # Inconsolata is monospaced and has no kerning, so each glyph starts where the
-    # previous glyph's advance width ends.
+    # HarfBuzz lays out the text the way browsers do, including the font's kerning, so the
+    # glyphs are spaced exactly as in the navbar. It reads the font as uncompressed bytes.
+    uncompressed_font: BytesIO = BytesIO()
+    font.flavor = None
+    font.save(uncompressed_font)
+    shaping_buffer: uharfbuzz.Buffer = uharfbuzz.Buffer()
+    shaping_buffer.add_str(banner_text)
+    shaping_buffer.guess_segment_properties()
+    uharfbuzz.shape(uharfbuzz.Font(uharfbuzz.Face(uncompressed_font.getvalue())), shaping_buffer)
+
     glyph_paths: list[str] = []
     pen_x_px: float = padding_px
-    for character in banner_text:
-        glyph_name: str = character_map[ord(character)]
+    for glyph_info, glyph_position in zip(shaping_buffer.glyph_infos, shaping_buffer.glyph_positions):
+        glyph_name: str = font.getGlyphName(glyph_info.codepoint)
         svg_pen: SVGPathPen = SVGPathPen(glyph_set, ntos=format_number)
         glyph_transform: Transform = (
             Transform()
-            .translate(pen_x_px, baseline_y_px)
+            .translate(pen_x_px + glyph_position.x_offset * px_per_unit, baseline_y_px)
             .scale(px_per_unit, -px_per_unit)
         )
         glyph_set[glyph_name].draw(TransformPen(svg_pen, glyph_transform))
         glyph_path: str = svg_pen.getCommands()
         if glyph_path:
             glyph_paths.append(glyph_path)
-        pen_x_px += font["hmtx"][glyph_name][0] * px_per_unit
+        pen_x_px += glyph_position.x_advance * px_per_unit
 
     banner_width_px: float = pen_x_px + padding_px
     width_text: str = format_number(banner_width_px)
