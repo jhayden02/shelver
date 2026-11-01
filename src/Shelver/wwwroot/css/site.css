@@ -118,25 +118,27 @@ body {
   font-size: 1.5rem;
 }
 
-/* Accounts are chosen by touch, so each one is a large button rather than a link. */
+/* Pages with narrow content are centered as one column. Text stays left-aligned inside it, so
+   labels and fields line up with the heading. */
+.page-narrow {
+  max-width: 28rem;
+  margin: 0 auto;
+}
+
+/* Accounts are chosen by touch, so each one is a large button rather than a link. The row is
+   centered and wraps, so a few accounts do not bunch up on one side. */
 .account-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 0.75rem;
 }
 
 .account-button {
+  width: 12rem;
   padding: 1rem;
   font-size: 1.25rem;
   border: 1px solid #000000;
-}
-
-.pin-form {
-  max-width: 20rem;
-}
-
-.user-form {
-  max-width: 28rem;
 }
 
 .pin-input {

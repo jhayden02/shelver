@@ -3,28 +3,30 @@
     ViewData["Title"] = "Create Account";
 }
 
-<h1 class="page-title">Create account</h1>
+<div class="page-narrow">
+    <h1 class="page-title">Create account</h1>
 
-<form asp-action="Create" method="post" class="user-form">
-    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-    <div class="mb-3">
-        <label asp-for="Username" class="form-label"></label>
-        <input asp-for="Username" class="form-control" autocomplete="off" />
-        <span asp-validation-for="Username" class="text-danger"></span>
-    </div>
-    <div class="mb-3">
-        <label asp-for="RoleName" class="form-label"></label>
-        <select asp-for="RoleName" asp-items="@(new SelectList(Roles.All))" class="form-select"></select>
-        <span asp-validation-for="RoleName" class="text-danger"></span>
-    </div>
-    <div class="mb-3">
-        <label asp-for="Pin" class="form-label"></label>
-        <input asp-for="Pin" class="form-control pin-input" type="password" inputmode="numeric" autocomplete="new-password" maxlength="6" />
-        <span asp-validation-for="Pin" class="text-danger"></span>
-    </div>
-    <button type="submit" class="btn btn-primary">Create</button>
-    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
-</form>
+    <form asp-action="Create" method="post">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="mb-3">
+            <label asp-for="Username" class="form-label"></label>
+            <input asp-for="Username" class="form-control" autocomplete="off" />
+            <span asp-validation-for="Username" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="RoleName" class="form-label"></label>
+            <select asp-for="RoleName" asp-items="@(new SelectList(Roles.All))" class="form-select"></select>
+            <span asp-validation-for="RoleName" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Pin" class="form-label"></label>
+            <input asp-for="Pin" class="form-control pin-input" type="password" inputmode="numeric" autocomplete="new-password" maxlength="6" />
+            <span asp-validation-for="Pin" class="text-danger"></span>
+        </div>
+        <button type="submit" class="btn btn-primary">Create</button>
+        <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />

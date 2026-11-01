@@ -3,28 +3,30 @@
     ViewData["Title"] = "Create Floor Plan";
 }
 
-<h1 class="floor-plan-title">Create floor plan</h1>
+<div class="page-narrow">
+    <h1 class="floor-plan-title">Create floor plan</h1>
 
-<form asp-action="Create" method="post">
-    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-    <div class="mb-3">
-        <label asp-for="Name" class="form-label"></label>
-        <input asp-for="Name" class="form-control" />
-        <span asp-validation-for="Name" class="text-danger"></span>
-    </div>
-    <div class="mb-3">
-        <label asp-for="WidthFeet" class="form-label"></label>
-        <input asp-for="WidthFeet" class="form-control" type="number" step="any" />
-        <span asp-validation-for="WidthFeet" class="text-danger"></span>
-    </div>
-    <div class="mb-3">
-        <label asp-for="HeightFeet" class="form-label"></label>
-        <input asp-for="HeightFeet" class="form-control" type="number" step="any" />
-        <span asp-validation-for="HeightFeet" class="text-danger"></span>
-    </div>
-    <button type="submit" class="btn btn-primary">Create</button>
-    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
-</form>
+    <form asp-action="Create" method="post">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="mb-3">
+            <label asp-for="Name" class="form-label"></label>
+            <input asp-for="Name" class="form-control" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="WidthFeet" class="form-label"></label>
+            <input asp-for="WidthFeet" class="form-control" type="number" step="any" />
+            <span asp-validation-for="WidthFeet" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="HeightFeet" class="form-label"></label>
+            <input asp-for="HeightFeet" class="form-control" type="number" step="any" />
+            <span asp-validation-for="HeightFeet" class="text-danger"></span>
+        </div>
+        <button type="submit" class="btn btn-primary">Create</button>
+        <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
