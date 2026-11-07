@@ -1,8 +1,8 @@
 # shelver design
 
 These documents describe what shelver does and why it is built the way it is. They are
-written before each feature is built and updated in the same commit whenever its behavior
-changes. Setup and deployment instructions are not covered here.
+written before each feature is built (hopefully) and updated in the same commit whenever
+its behavior changes. Setup and deployment instructions are not covered here.
 
 ## Status markers
 
@@ -24,20 +24,19 @@ shelves physically are in a building and which inventory sits on each shelf, so 
   store.
 
 The store remains the system of record for inventory. shelver adds the spatial knowledge the
-store does not have.
+store does not have and also enforces a certain way of interacting with the inventory layout.
 
 ## Concepts
 
 - **Building:** a named site such as "Main Office" or "Warehouse," created and saved as a
-  whole, used only for organization. Its number of floors is set when it is created and never
-  changes.
+  whole, used only for organization.
 - **Floor:** one level of a building, numbered 1, 2, 3 upward. Each floor has its own size,
   structure, and shelves. All floors of a building share one coordinate system, so a point on
   one floor is directly above or below the same point on the others; a smaller floor, such as
   a mezzanine, is positioned by an offset within it.
 - **Structure:** a floor's walls, doors, and stairs.
-- **Stairs:** a stairway linking a lower and an upper floor, drawn as a rectangle of any length
-  covering the same area on both. One side is marked **bottom**, where it is entered from the
+- **Stairs:** a stairway linking two floors, drawn as a rectangle of any length covering the
+  same area on both. One side is marked **bottom**, where it is entered from the
   lower floor, and the opposite side **top**, where it is entered from the upper floor.
 - **Room:** a named area of a floor, enclosed by walls and doors, that groups shelves and has
   one entrance door. Its name, such as `A`, is unique across all buildings. Shelf numbering
@@ -71,3 +70,6 @@ store does not have.
   - [Home](pages/home.md)
   - [Shelf view](pages/shelf-view.md)
   - [Users](pages/users.md)
+- Designs:
+  - [Site Wireframe](designs/site_wireframe.drawio.png)
+  - [Home View](designs/home_view.drawio.png)
