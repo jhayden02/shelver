@@ -1,39 +1,15 @@
 # Tools
 
-Helper scripts for working on shelver. They are not part of the app and are never deployed.
+Helper scripts for working on shelver.
 
 ## Running the scripts
 
 The scripts are run with [uv](https://docs.astral.sh/uv/). To install it, follow the
 instructions [here](https://docs.astral.sh/uv/getting-started/installation/).
 
-### On any platform
-
 ```bash
-uv run tools/generate_brand_images.py
+uv run generate_brand_images.py
 ```
-
-This works on Linux, macOS, and Windows.
-
-### On Linux and macOS
-
-The scripts are executable and start with this line:
-
-```bash
-#!/usr/bin/env -S uv run --script
-```
-
-so they can also be run directly, and the system hands them to uv:
-
-```bash
-./tools/generate_brand_images.py
-```
-
-### Do not run them with python directly
-
-`python3 tools/generate_brand_images.py` ignores the `# /// script` block. The script then runs
-on whatever Python is on your `PATH`, without its version check and without its dependencies,
-so it may fail or behave differently.
 
 ## Scripts
 
@@ -54,7 +30,7 @@ Creates an Administrator, or resets an existing Administrator's PIN. Also used t
 first account on a new install.
 
 ```bash
-uv run tools/reset_admin.py <username>
+uv run reset_admin.py <username>
 ```
 
 - It asks for the new 6-digit PIN twice, without showing it.

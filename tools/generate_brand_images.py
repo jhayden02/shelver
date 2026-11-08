@@ -25,12 +25,7 @@
 # ///
 
 # This writes the README banner and the browser tab icon from the site font, so neither ever
-# has to be redrawn by hand. Both are the navbar brand's white box with a black border: the
-# banner holds "shelver" and the icon holds "s". Text is converted to vector paths because
-# GitHub shows README images in a sandbox that cannot load web fonts. Run it with
-# "uv run tools/generate_brand_images.py" after changing the font, which installs the Python
-# version and packages listed above.
-
+# has to be redrawn by hand. 
 from io import BytesIO
 from pathlib import Path
 from xml.etree import ElementTree
